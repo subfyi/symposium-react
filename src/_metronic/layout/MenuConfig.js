@@ -26,13 +26,13 @@ export default {
                 title: "Documents",
                 root: true,
                 alignment: "left",
-                page: "https://iseser.com/",
+                page: "https://iseser.com/documents",
             },
             {
                 title: "Old Symposiums",
                 root: true,
                 alignment: "left",
-                page: "https://iseser.com/",
+                page: "https://iseser.com/documents/all",
             },
             {
                 title: "Contact",
