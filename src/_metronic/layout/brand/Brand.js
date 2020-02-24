@@ -28,7 +28,7 @@ class Brand extends React.Component {
               className="kt-header__brand-logo-sticky w-50"
           />
         </Link> <Link to="" className="text-white">
-        ISESER 2020
+        2020
       </Link>
       </div>
     );
