@@ -55,7 +55,7 @@ export default class GenelForm extends Component {
       if(this.props.history) {
         this.props.history.push(this.props.redirect);
       }
-      await swal2.fire('Başarılı', 'Kayıt basarı ile eklendi.', 'success');
+      await swal2.fire('Successful', 'Added successfully.', 'success');
     }
   }
 
