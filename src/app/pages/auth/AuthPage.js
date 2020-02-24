@@ -44,33 +44,33 @@ export default function AuthPage() {
                 <Link to="/" className="kt-login__logo" >
                   <img
                     alt="Logo" className="w-100"
-                    src={toAbsoluteUrl("/narusta/logos/logo2.png")}
+                    src={toAbsoluteUrl("/logos/logo.big.jpg")}
                   />
                 </Link>
               </div>
               <div className="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
                 <div className="kt-grid__item kt-grid__item--middle">
-                  <h3 className="kt-login__title">NARUSTA</h3>
+                  <h3 className="kt-login__title">ISESER</h3>
                   <h4 className="kt-login__subtitle">
-                    Social Business Network
+                    2020
                   </h4>
                 </div>
               </div>
               <div className="kt-grid__item">
                 <div className="kt-login__info">
                   <div className="kt-login__copyright">
-                    Narusta  &nbsp;&copy;&nbsp; 2019 .<br/><a href="https://hermesreklam.com" target="_blank">Hermes Reklam </a> Tüm hakları saklıdır.
+                    © Made with ❤ <a target="_blank" href="https://sub.fyi/">Sub.fyi</a>.
                   </div>
                   <div className="kt-login__menu">
-                    <a href="http://www.google.com.tr/search?hl=tr&q=Narusta" target="_blank">
+                    <a href="http://www.google.com.tr/search?hl=tr&q=ISESER" target="_blank">
                       G-Arama
                     </a>
-                    <a href="http://www.alexa.com/siteinfo/narusta.com" target="_blank">
+                    <a href="http://www.alexa.com/siteinfo/iseser.com" target="_blank">
                       Alexa
                     </a>
-                    <Link to="/terms" className="kt-link">
+                    <a target="_blank" href="https://iseser.com/contact" className="kt-link">
                       Contact
-                    </Link>
+                    </a>
 
                   </div>
                 </div>
@@ -82,11 +82,8 @@ export default function AuthPage() {
                 <Redirect from="/auth" exact={true} to="/auth/login" />
 
                 <Route path="/auth/login" component={Login} />
-                <Route path="/auth/registration" component={Registration} />
-                <Route
-                  path="/auth/forgot-password"
-                  component={ForgotPassword}
-                />
+                <Link to="https://iseser.com/register" component={Registration} />
+
               </Switch>
             </div>
           </div>

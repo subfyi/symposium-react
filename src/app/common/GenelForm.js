@@ -61,13 +61,13 @@ export default class GenelForm extends Component {
       <div className="animated fadeIn">
         <Card>
           <CardHeader>
-             { this.props.name } { this.props.id ? "Düzenle" : "Ekle" }
+             { this.props.name } { this.props.id ? "Edit" : "Edit" }
           </CardHeader>
           <CardBody>
             { this.props.children(this) }
             <Row>
               <Col xs="12">
-                <a href="#" className="btn btn-primary col-12 mt-4" onClick={this.save.bind(this)}><i className="fa fa-save" /> { this.props.id ? "Düzenle" : "Ekle" }</a>
+                <a href="#" className="btn btn-primary col-12 mt-4" onClick={this.save.bind(this)}><i className="fa fa-save" /> { this.props.id ? "Edit" : "Edit" }</a>
               </Col>
             </Row>
           </CardBody>

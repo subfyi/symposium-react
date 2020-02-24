@@ -87,7 +87,7 @@ export default class FilePickerCore extends Component {
 
     if(controller.$state === 1) { // dosya sec
       return <div className={this.props.className}>
-        <a href="#" className="btn btn-primary btn-sm" onClick={this.dosyaSec.bind(this)}><i className="fa fa-upload" /> Dosya Secin</a>
+        <a href="#" className="btn btn-primary btn-sm" onClick={this.dosyaSec.bind(this)}><i className="fa fa-upload" /> Choose File</a>
       </div>;
     } else if(controller.$state === 2) { // yukleniyor
       return <div className={this.props.className}>

@@ -19,16 +19,16 @@ class Brand extends React.Component {
         <Link to="" className="kt-header__brand-logo">
           <img
               alt="logo"
-              src={toAbsoluteUrl("/narusta/logos/logo.ico")}
+              src={toAbsoluteUrl("/logos/logo2.png")}
               className="kt-header__brand-logo-default w-75"
           />
           <img
               alt="logo"
-              src={toAbsoluteUrl("/narusta/logos/logo.ico")}
+              src={toAbsoluteUrl("/logos/logo2.png")}
               className="kt-header__brand-logo-sticky w-50"
           />
         </Link> <Link to="" className="text-white">
-        NARUSTA R1.0
+        ISESER 2020
       </Link>
       </div>
     );

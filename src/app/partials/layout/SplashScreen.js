@@ -7,8 +7,8 @@ class SplashScreen extends React.Component {
     return (
       <>
         <div className="kt-splash-screen">
-        <img src={toAbsoluteUrl("/narusta/logos/logo2.png")}
-          alt="Metronic logo" />
+        <img src={toAbsoluteUrl("/logos/logo.big.jpg")}
+          alt="logo" />
         <CircularProgress className="kt-splash-screen__spinner" />
         </div>
       </>

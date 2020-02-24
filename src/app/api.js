@@ -6,7 +6,7 @@ import Axios from 'axios';
 
 var isLocal = window.location.host.indexOf('localhost') === 0;
 
-const endpoint = isLocal ? 'http://127.0.0.1:8000/' : 'https://narusta.com/';
+const endpoint = isLocal ? 'http://127.0.0.1:8000/' : 'https://iseser.com/';
 
 var client_id = '2',
     client_secret = 'JjPIsb7TNCf7ysEfs0JDhl5XXBgIVh6dMRLMCrb9';

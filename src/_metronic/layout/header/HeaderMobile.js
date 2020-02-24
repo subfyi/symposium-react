@@ -28,8 +28,8 @@ class HeaderMobile extends React.Component {
       >
         <div className="kt-header-mobile__logo">
           <Link to="/">
-            <img className="w-25" alt="logo" src={toAbsoluteUrl("/narusta/logos/logo.ico")} />
-          </Link> NARUSTA
+            <img className="w-25" alt="logo" src={toAbsoluteUrl("/logos/logo2.png")} />
+          </Link> ISESER
         </div>
 
         <div className="kt-header-mobile__toolbar">

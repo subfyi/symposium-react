@@ -28,20 +28,20 @@ class Footer extends React.Component {
             <div className="kt-footer__wrapper">
               <div className="kt-footer__logo">
                 <div className="kt-footer__copyright">
-                  Narusta  &nbsp;&copy;&nbsp; {today} . &nbsp;<a href="https://hermesreklam.com" target="_blank">
-                  Hermes Reklam
-                </a> Tüm hakları saklıdır.
+                  ISESER  &nbsp;&copy;&nbsp; {today} . &nbsp;<a href="https://sub.fyi" target="_blank">
+                  Sub.fyi
+                </a>
 
                 </div>
               </div>
               <div className="kt-footer__menu">
-                <a href="http://www.google.com.tr/search?hl=tr&q=Narusta" target="_blank">
+                <a href="http://www.google.com.tr/search?hl=tr&q=ISESER" target="_blank">
                   G-Arama
                 </a>
-                <a href="http://www.alexa.com/siteinfo/narusta.com" target="_blank">
+                <a href="http://www.iseser.com/siteinfo/iseser.com" target="_blank">
                   Alexa
                 </a>
-                <a href="http://keenthemes.com/metronic">
+                <a target="_blank" href="https://iseser.com/contact">
                   Contact
                 </a>
               </div>

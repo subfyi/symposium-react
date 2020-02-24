@@ -68,7 +68,7 @@ export default class DataTable extends Component {
         return <div>
             <FormGroup row>
                 <Col xs="12" md="2">
-                    {this.props.add && <Link to={this.props.add} className="col-md-12 btn btn-primary font-xl d-block mb-12"><i className="fa fa-plus" /> Yeni Ekle</Link>}
+                    {this.props.add && <Link to={this.props.add} className="col-md-12 btn btn-primary font-xl d-block mb-12"><i className="fa fa-plus" /> Add New</Link>}
                 </Col>
                 <Col xs="12" md="6"></Col>
                 <Col xs="12" md="4">

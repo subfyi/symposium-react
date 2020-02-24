@@ -45,7 +45,7 @@ class UserProfile extends React.Component {
           >
             {showHi && (
               <span className="kt-header__topbar-welcome kt-hidden-mobile">
-                Merhaba,
+                Welcome,
               </span>
             )}
 
@@ -73,43 +73,25 @@ class UserProfile extends React.Component {
               backgroundImage: `url(${toAbsoluteUrl("/media/misc/bg-1.jpg")})`
             }}
           >
-            <div className="kt-user-card__avatar">
-              <img alt="Pic" className="kt-hidden" src={user && user.pic} />
-              <span className="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">
-                N
-              </span>
-            </div>
             <div className="kt-user-card__name">{this.state.profile && this.state.profile.name}</div>
 
           </div>
           <div className="kt-notification">
-            <a className="kt-notification__item">
+            <a href="/profile" className="kt-notification__item">
               <div className="kt-notification__item-icon">
                 <i className="flaticon2-calendar-3 kt-font-success" />
               </div>
               <div className="kt-notification__item-details">
                 <div className="kt-notification__item-title kt-font-bold">
-                  Profil
+                  My
                 </div>
                 <div className="kt-notification__item-time">
-                  Bilgileri
+                  Profile
                 </div>
               </div>
             </a>
 
-            <a className="kt-notification__item">
-              <div className="kt-notification__item-icon">
-                <i className="flaticon2-hourglass kt-font-brand" />
-              </div>
-              <div className="kt-notification__item-details">
-                <div className="kt-notification__item-title kt-font-bold">
-                  SSS
-                </div>
-                <div className="kt-notification__item-time">
-                  Sık Sorulan Sorular
-                </div>
-              </div>
-            </a>
+
             <div className="kt-notification__custom">
               <Link
                 to="/logout"

@@ -38,7 +38,7 @@ export const initLayoutConfig = {
       width: "fixed", // fixed|fluid
       fixed: {
         desktop: {
-          enabled: true,
+          enabled: false,
           mode: "menu" //supported modes: all, topbar, menu
         },
         mobile: true

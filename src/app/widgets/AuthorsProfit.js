@@ -126,7 +126,7 @@ export default function AuthorsProfit() {
               <div className="kt-widget4__pic kt-widget4__pic--pic">
                 <img
                   alt=""
-                  src={toAbsoluteUrl("/media/client-logos/logo2.png")}
+                  src={toAbsoluteUrl("/media/client-logos/logo.big.jpg")}
                 />
               </div>
               <div className="kt-widget4__info">

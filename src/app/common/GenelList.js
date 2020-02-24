@@ -62,8 +62,8 @@ export default class GenelList extends Component {
               <td>{row.id}</td>
               {this.props.children[1](row)}
               {(this.props.islem !== false && <td className="thstyle">
-                {this.props.edit && <Link to={this.props.edit(row.id)} className="btn btn-sm btn-outline-primary"><i className="fas fa-edit" /> Düzenle</Link>}
-                {this.props.sil !== false && <a href="#" onClick={this.handleDelete.bind(this, row)} className="btn btn-outline-danger ml-1 btn-sm"><i className="fa fa-trash" /> Sil</a>}
+                {this.props.edit && <Link to={this.props.edit(row.id)} className="btn btn-sm btn-outline-primary"><i className="fas fa-edit" /> Edit</Link>}
+                {this.props.sil !== false && <a href="#" onClick={this.handleDelete.bind(this, row)} className="btn btn-outline-danger ml-1 btn-sm"><i className="fa fa-trash" /> Delete</a>}
               </td>) || null}
             </tr>
           }

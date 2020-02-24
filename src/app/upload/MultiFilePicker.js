@@ -74,7 +74,7 @@ export default class MultiFilePicker extends Component {
 
   render() {
     return <div>
-      <a href="#" className="btn btn-outline-primary btn-sm" onClick={this.dosyaSec.bind(this)}><i className="fa fa-upload" /> Dosya Secin</a>
+      <a href="#" className="btn btn-outline-primary btn-sm" onClick={this.dosyaSec.bind(this)}><i className="fa fa-upload" /> Choose File</a>
       {(this.state.controllers || []).map((a, index) => <FilePickerCore key={index} className="mt-2" onNotify={this.handleChange.bind(this, a)} controller={a} />)}
     </div>;
   }
