@@ -7,7 +7,7 @@ import { tokenized } from '../api';
 
 import memoizeOne from 'memoize-one';
 
-var photo_ext = ["png", "jpg", "jpeg"];
+var photo_ext = ["pdf", "doc", "docx", "docx"];
 
 function uzanti(isim) {
   var bol = isim.split('.');
