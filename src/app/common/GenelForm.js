@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import swal2 from 'sweetalert2';
-import { hatagoster, tokenized } from '../api';
+import { hatagoster, hatagostervalue, tokenized } from '../api';
 
 import { Button, Card, CardBody, CardHeader, CardGroup, FormFeedback, FormText, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import SimpleReactValidator from 'simple-react-validator';
@@ -25,8 +25,11 @@ export default class GenelForm extends Component {
   }
 
   async componentDidMount() {
-    if(this.props.id) {
-      var parameter = await tokenized.get(`${this.props.url}/${this.props.id}`);
+    if(this.props.direct) {
+      var parameter = await hatagostervalue(tokenized.get(`${this.props.url}`));
+      this.setState(parameter.data);
+    } else if(this.props.id) {
+      var parameter = await hatagostervalue(tokenized.get(`${this.props.url}/${this.props.id}`));
       this.setState(parameter.data);
     } else if(this.props.newModel) {
       this.setState(this.props.newModel);

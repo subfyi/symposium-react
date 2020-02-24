@@ -220,6 +220,17 @@ export default class HMenuItem extends React.Component {
 
         {/* if item hasn't submenu */}
         {!item.submenu && (
+          item.page.indexOf("https://") === 0 ? 
+          <a href={item.page || ""} className="kt-menu__link">
+            <MenuItemInner
+              item={item}
+              parentItem={parentItem}
+              currentUrl={currentUrl}
+            />
+          </a>
+          
+          : 
+
           <Link to={`/${item.page || ""}`} className="kt-menu__link">
             <MenuItemInner
               item={item}

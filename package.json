@@ -1,8 +1,8 @@
 {
-  "name": "demo4",
+  "name": "symposium-react",
   "version": "6.1.5",
   "private": true,
-  "homepage": "https://user.iseser.com/",
+  "homepage": "https://portal.iseser.com/",
   "scripts": {
     "serve": "cp-cli build _site/metronic/preview/react && serve",
     "start": "react-scripts start",

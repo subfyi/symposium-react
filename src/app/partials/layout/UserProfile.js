@@ -77,7 +77,7 @@ class UserProfile extends React.Component {
 
           </div>
           <div className="kt-notification">
-            <a href="/profile" className="kt-notification__item">
+            <Link to="/profile" className="kt-notification__item">
               <div className="kt-notification__item-icon">
                 <i className="flaticon2-calendar-3 kt-font-success" />
               </div>
@@ -89,7 +89,7 @@ class UserProfile extends React.Component {
                   Profile
                 </div>
               </div>
-            </a>
+            </Link>
 
 
             <div className="kt-notification__custom">

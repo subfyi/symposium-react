@@ -29,7 +29,7 @@ export default class Edit extends Component {
             <CommonForm
                 name="My Profile"
                 url="/api/profile"
-                id={this.props.match.params.id}
+                direct={true}
                 {...this.props}
             >
                 {
@@ -67,30 +67,31 @@ export default class Edit extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="factor_cins"
+                                    name="u_title"
                                     type="required"
                                     controller={controller}>
                                     <ParameterSelect
-                                        type="para-birimi"
-                                        value={controller.state.factor_cins}
-                                        onChange={a => controller.setState({factor_cins: a})} />
+                                        type="titlecon"
+                                        cachedValue={controller.state.utitle}
+                                        value={controller.state.u_title}
+                                        onChange={a => controller.setState({u_title: a})} />
                                 </Validator>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
                             <Col md="3">
-                                <Label htmlFor="select">Type
-                                </Label>
+                                <Label htmlFor="select">Type</Label>
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="factor_cins"
+                                    name="u_type"
                                     type="required"
                                     controller={controller}>
                                     <ParameterSelect
-                                        type="para-birimi"
-                                        value={controller.state.factor_cins}
-                                        onChange={a => controller.setState({factor_cins: a})} />
+                                        type="materialcon"
+                                        cachedValue={controller.state.utype}
+                                        value={controller.state.u_type}
+                                        onChange={a => controller.setState({u_type: a})} />
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -101,17 +102,17 @@ export default class Edit extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="factor_cins"
+                                    name="gender"
                                     type="required"
                                     controller={controller}>
                                     <ParameterSelect
-                                        type="para-birimi"
-                                        value={controller.state.factor_cins}
-                                        onChange={a => controller.setState({factor_cins: a})} />
+                                        type="gender"
+                                        cachedValue={controller.state.genderdata}
+                                        value={controller.state.gender}
+                                        onChange={a => controller.setState({gender: a})} />
                                 </Validator>
                             </Col>
                         </FormGroup>
-
 
                         <FormGroup row>
                             <Col md="3">
@@ -127,45 +128,48 @@ export default class Edit extends Component {
                                 </Validator>
                             </Col>
                         </FormGroup>
+
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Institution</Label>
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="unvan"
+                                    name="institution"
                                     type="required"
                                     controller={controller}>
-                                    <Input type="text" value={controller.state.unvan}
-                                           onChange={a => controller.setState({unvan: a.currentTarget.value})}/>
+                                    <Input type="text" value={controller.state.institution}
+                                           onChange={a => controller.setState({institution: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
+
                         <FormGroup row>
-                        <Col md="3">
-                            <Label htmlFor="text-input">Faculty</Label>
-                        </Col>
-                        <Col xs="12" md="9">
-                            <Validator
-                                name="unvan"
-                                type="required"
-                                controller={controller}>
-                                <Input type="text" value={controller.state.unvan}
-                                       onChange={a => controller.setState({unvan: a.currentTarget.value})}/>
-                            </Validator>
-                        </Col>
-                    </FormGroup>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Faculty</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <Validator
+                                    name="faculty"
+                                    type="required"
+                                    controller={controller}>
+                                    <Input type="text" value={controller.state.faculty}
+                                        onChange={a => controller.setState({faculty: a.currentTarget.value})}/>
+                                </Validator>
+                            </Col>
+                        </FormGroup>
+
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Department</Label>
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="unvan"
+                                    name="department"
                                     type="required"
                                     controller={controller}>
-                                    <Input type="text" value={controller.state.unvan}
-                                           onChange={a => controller.setState({unvan: a.currentTarget.value})}/>
+                                    <Input type="text" value={controller.state.department}
+                                           onChange={a => controller.setState({department: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -188,13 +192,9 @@ export default class Edit extends Component {
                                 <Label htmlFor="text-input">Password</Label>
                             </Col>
                             <Col xs="12" md="9">
-                                <Validator
-                                    name="tonaj"
-                                    type="required"
-                                    controller={controller}>
-                                    <Input type="text" value={controller.state.tonaj}
-                                           onChange={a => controller.setState({tonaj: a.currentTarget.value})}/>
-                                </Validator>
+                                <Input type="password" value={controller.state.password}
+                                    autocomplete="new-password"
+                                    onChange={a => controller.setState({password: a.currentTarget.value})}/>
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -203,11 +203,11 @@ export default class Edit extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="aciklama"
+                                    name="address"
                                     type="required"
                                     controller={controller}>
-                                    <Input type="text" value={controller.state.aciklama}
-                                           onChange={a => controller.setState({aciklama: a.currentTarget.value})}/>
+                                    <Input type="text" value={controller.state.address}
+                                           onChange={a => controller.setState({address: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>

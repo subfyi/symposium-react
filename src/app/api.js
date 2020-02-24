@@ -27,10 +27,23 @@ export async function hatagoster(data) {
   } catch(e) {
     if(!Axios.isCancel(e)) {
       console.error('Hata:', e);
-      await swal2.fire('Hata olustu', (e.data && e.data.message) || e.message || e || "Hata olustu.", 'error');
+      await swal2.fire('Hata olustu', (e.response && e.response.data && e.response.data.message) || e.message || e || "Hata olustu.", 'error');
     }
   }
   return 1;
+}
+
+export async function hatagostervalue(data) {
+  try {
+    return await data;
+  } catch(e) {
+    if(!Axios.isCancel(e)) {
+      console.error('Hata:', e);
+      await swal2.fire('Hata olustu', (e.response && e.response.data && e.response.data.message) || e.message || e || "Hata olustu.", 'error');
+    }
+
+    throw e;
+  }
 }
 
 export function is_logged_in() {

@@ -48,7 +48,7 @@ export default {
                 title: "Contact",
                 root: true,
                 alignment: "left",
-                page: "https://iseser.com/",
+                page: "https://iseser.com/contact",
                 bullet: "dot"
             },
         ]
