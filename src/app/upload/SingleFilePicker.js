@@ -10,7 +10,7 @@ export function fix_url(data) {
       id: data.id,
       name: data.r_dosyaisimi,
       size: data.f_dosya_boyut,
-      access_url: `/uploads/${data.f_klasorismi}/${data.f_dosyaisimi}`
+      access_url: `/uploads/dosya/${data.f_klasorismi}/${data.f_dosyaisimi}`
     };
   }
 
