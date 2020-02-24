@@ -60,7 +60,7 @@ export default class FilePickerCore extends Component {
     e.preventDefault();
 
     var dosyalar = await fileDialog({
-      accept: this.props.accepts || 'image/*'
+      accept: this.props.accepts || 'application/msword,.docx,.pdf'
     });
 
     var dosya = dosyalar[0];
