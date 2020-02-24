@@ -7,14 +7,6 @@ export default {
                 root: true,
                 alignment: "left",
                 page: "https://iseser.com/",
-                bullet: "dot"
-            },
-            {
-                title: "Profile",
-                root: true,
-                alignment: "left",
-                page: "profile",
-                bullet: "line"
             },
             {
                 title: "Paper Submission",
@@ -35,21 +27,18 @@ export default {
                 root: true,
                 alignment: "left",
                 page: "https://iseser.com/",
-                bullet: "dot"
             },
             {
                 title: "Old Symposiums",
                 root: true,
                 alignment: "left",
                 page: "https://iseser.com/",
-                bullet: "dot"
             },
             {
                 title: "Contact",
                 root: true,
                 alignment: "left",
                 page: "https://iseser.com/contact",
-                bullet: "dot"
             },
         ]
     }
