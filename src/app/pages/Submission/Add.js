@@ -37,6 +37,7 @@ export default class Add extends Component {
                 name="Submission"
                 url="/api/submission"
                 id={this.props.match.params.id}
+                redirect="/submissions"
                 {...this.props}
             >
                 {

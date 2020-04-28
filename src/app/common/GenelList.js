@@ -19,13 +19,13 @@ export default class GenelList extends Component {
     e.preventDefault();
 
     var modal = await swal2.fire({
-      title: 'Emin misiniz?',
-      text: "Bunu geri alamayacaksın!",
+      title: 'Are you sure?',
+      text: "You can not get it back!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Evet, sil!'
+      confirmButtonText: 'Yes, delete!'
     });
 
     if(!modal.value) {
@@ -36,7 +36,7 @@ export default class GenelList extends Component {
 
     if(!hata) {
       this.dataTable.current.updateAndReload({}, e);
-      await swal2.fire('Basarılı', 'Kayıt basarı ile silindi!', 'success');
+      await swal2.fire('Success', 'Record succesccfully deleted!', 'success');
     }
   }
 

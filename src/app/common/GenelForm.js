@@ -39,17 +39,27 @@ export default class GenelForm extends Component {
   async save(e) {
     e.preventDefault();
 
+    if(this.loading)
+      return ;
+
     if (!this.validator.allValid()) {
       this.validator.showMessages();
       this.forceUpdate();
       return ;
     }
 
-    var hata = await hatagoster(this.props.id ?
-        tokenized.patch(`${this.props.url}/${this.props.id}`, this.state)
-        :
-        tokenized.post(`${this.props.url}`, this.state)
-    );
+    var hata;
+
+    this.loading = true;
+    try {
+      hata = await hatagoster(this.props.id ?
+          tokenized.patch(`${this.props.url}/${this.props.id}`, this.state)
+          :
+          tokenized.post(`${this.props.url}`, this.state)
+      );
+    } finally {
+      this.loading = false;
+    }
 
     if(!hata) {
       if(this.props.history) {
@@ -64,7 +74,7 @@ export default class GenelForm extends Component {
       <div className="animated fadeIn">
         <Card>
           <CardHeader>
-             { this.props.name } { this.props.id ? "Edit" : "Edit" }
+             { this.props.name } { this.props.id ? "Edit" : "Save" }
           </CardHeader>
           <CardBody>
             { this.props.children(this) }

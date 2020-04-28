@@ -32,18 +32,15 @@ export default function HomePage() {
                 {
                     <Redirect exact from="/" to="/submissions"/>
                 }
-                
+
+                <Route path="/profile" basename="Profilim" component={ProfileEdit} />
+
                 <Route path="/submission/:id/edit" basename="Edit Submission" component={AddSubmission}/>
                 <Route path="/submission/create" basename="Add Submission" component={AddSubmission}/>
                 <Route path="/submissions" basename="Submissions" component={Submissions}/>
 n
                 <Route path="/profile" basename="My Profile" component={ProfileEdit} />
 
-                <Route path="/builder" component={Builder}/>
-                <Route path="/dashboard" component={Dashboard}/>
-                <Route path="/google-material" component={GoogleMaterialPage}/>
-                <Route path="/react-bootstrap" component={ReactBootstrapPage}/>
-                <Route path="/docs" component={DocsPage}/>
                 <Redirect to="/error/error-v1"/>
             </Switch>
         </Suspense>
