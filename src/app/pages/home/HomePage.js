@@ -25,6 +25,14 @@ const AddSubmission = React.lazy(() =>
     import('../Submission/Add')
 );
 
+const Presentation = React.lazy(() =>
+    import('../Presentation/List')
+);
+
+const AddPresentation = React.lazy(() =>
+    import('../Presentation/Add')
+);
+
 export default function HomePage() {
     return (
         <Suspense>
@@ -33,13 +41,15 @@ export default function HomePage() {
                     <Redirect exact from="/" to="/submissions"/>
                 }
 
-                <Route path="/profile" basename="Profilim" component={ProfileEdit} />
+                <Route path="/profile" component={ProfileEdit}/>
 
-                <Route path="/submission/:id/edit" basename="Edit Submission" component={AddSubmission}/>
-                <Route path="/submission/create" basename="Add Submission" component={AddSubmission}/>
-                <Route path="/submissions" basename="Submissions" component={Submissions}/>
-n
-                <Route path="/profile" basename="My Profile" component={ProfileEdit} />
+                <Route path="/submission/:id/edit" component={AddSubmission}/>
+                <Route path="/submission/create" component={AddSubmission}/>
+                <Route path="/submissions" component={Submissions}/>
+
+                <Route path="/presentation/:id/edit" component={AddPresentation}/>
+                <Route path="/presentation/create" component={AddPresentation}/>
+                <Route path="/presentation" component={Presentation}/>
 
                 <Redirect to="/error/error-v1"/>
             </Switch>

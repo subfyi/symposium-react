@@ -23,23 +23,38 @@ export default {
                 bullet: "dot"
             },
             {
-                title: "Documents",
+                title: "Presentations",
                 root: true,
                 alignment: "left",
-                page: "https://iseser.com/documents",
+                page: "presentation",
+                bullet: "dot"
             },
+
             {
-                title: "Old Symposiums",
+                title: "Others",
+                bullet: "line",
                 root: true,
                 alignment: "left",
-                page: "https://iseser.com/documents/all",
+                toggle: "click",
+                submenu: [
+                    {
+                        title: "Documents",
+                        page: "https://iseser.com/documents",
+                        bullet: "line",
+                    },
+                    {
+                        title: "Old Symposiums",
+                        page: "https://iseser.com/documents/all",
+                        bullet: "line",
+                    },
+                    {
+                        title: "Contact",
+                        page: "https://iseser.com/contact",
+                        bullet: "line",
+                    },
+                ]
             },
-            {
-                title: "Contact",
-                root: true,
-                alignment: "left",
-                page: "https://iseser.com/contact",
-            },
+
         ]
     }
 };
