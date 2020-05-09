@@ -47,8 +47,7 @@ export default function HomePage() {
                 <Route path="/submission/create" component={AddSubmission}/>
                 <Route path="/submissions" component={Submissions}/>
 
-                <Route path="/presentation/:id/edit" component={AddPresentation}/>
-                <Route path="/presentation/create" component={AddPresentation}/>
+                <Route path="/presentation/:id/watch" component={AddPresentation}/>
                 <Route path="/presentation" component={Presentation}/>
 
                 <Redirect to="/error/error-v1"/>

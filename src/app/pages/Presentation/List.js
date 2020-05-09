@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Card, CardBody} from 'reactstrap';
 import GenelList from '../../common/GenelList';
+import { Link } from 'react-router-dom';
 
 import FileDownload from '../../common/FileDownload';
  
@@ -9,7 +10,7 @@ export default class List extends Component {
         return <div className="animated fadeIn">
             <Card>
                 <CardBody>
-                    <GenelList url="/api/submission" edit={id => `/presentation/${id}/edit`} add="/presentation/create">
+                    <GenelList islem={false} url="/api/submission?presentation=1">
                         <>
                             <th sort="created_at">Sended Date</th>
                             <th sort="pap_title">Title of Abstract</th>
@@ -17,8 +18,7 @@ export default class List extends Component {
                             <th sort="parampap.value">Pap. Type</th>
                             <th sort="parampre.value">Pre. Type</th>
                             <th>Authors</th>
-                            <th>Files</th>
-
+                            <th></th>
                         </>
                         {
                             row => <>
@@ -33,11 +33,7 @@ export default class List extends Component {
                                     {!!author.presenter && <span>(Presenter)</span>}
                                 </div>
                                 </div>)}</td>
-                                <td>
-                                    <FileDownload label="Abstract" value={row.abstract_dosya} />
-                                    <FileDownload label="Full Paper" value={row.full_paper_dosya} />
-                                    <FileDownload label="Presentation" value={row.poster_presentation_dosya} />
-                                </td>
+                                <th><Link to={"/presentation/" + row.id + "/watch"} className="btn btn-sm btn-outline-primary"><i className="fas fa-eye" /> Watch</Link></th>
                             </>
                         }
                     </GenelList>

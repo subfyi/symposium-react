@@ -24,16 +24,21 @@ import AuthorSelect from '../../common/AuthorSelect';
 import MultiParameterSelect from '../../common/MultiParameterSelect';
 import ParameterSelect from '../../common/ParameterSelect';
 import SingleFilePicker from '../../upload/SingleFilePicker';
-
+import { controllers } from 'chart.js';
+import { tokenized } from '../../api';
 
 export default class Add extends Component {
-    constructor(props) {
-        super(props);
+    state = {};
+
+    async componentWillMount() {
+        const user = await tokenized.get('/api/myself');
+        this.setState({ user: user.data });
     }
 
     render() {
         return (
             <CommonForm
+                key={this.props.match.params.id || 0}
                 name="Submission"
                 url="/api/submission"
                 id={this.props.match.params.id}
@@ -175,6 +180,27 @@ export default class Add extends Component {
                         </FormGroup>
                         <FormGroup row>
                             <Col md="3">
+                                <Label htmlFor="text-input">Presentation File (.mp4)</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <SingleFilePicker
+                                    accepts="video/mp4"
+                                    value={controller.state.video}
+                                    onChange={a => controller.setState({ video: a })}
+                                />
+                            </Col>
+                        </FormGroup>
+                        { this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Video IFrame URL</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <Input type="text" value={controller.state.video_presentation_url} rows="3"
+                                    onChange={a => controller.setState({video_presentation_url: a.currentTarget.value})} />
+                            </Col>
+                        </FormGroup> }
+                        <FormGroup row>
+                            <Col md="3">
                                 <Label htmlFor="text-input">Prefered Publish Type</Label>
                             </Col>
                             <Col xs="12" md="9">
@@ -194,93 +220,112 @@ export default class Add extends Component {
                                 <Label htmlFor="text-input">Message to Congress</Label>
                             </Col>
                             <Col xs="12" md="9">
-                                <Validator
-                                    name="mes_congress"
-                                    type="required"
-                                    controller={controller}>
-                                    <Input type="textarea" value={controller.state.mes_congress}
-                                    rows="3"
-                                           onChange={a => controller.setState({mes_congress: a.currentTarget.value})}/>
-                                </Validator>
+                                <Input type="textarea" value={controller.state.mes_congress} rows="3"
+                                    onChange={a => controller.setState({mes_congress: a.currentTarget.value})}/>
                             </Col>
                         </FormGroup>
 
-                        <table className="table table-striped tablo">
-                            <thead>
-                                <tr>
-                                    <th style={{ width: '5%' }}>#</th>
-                                    <th style={{ width: '25%' }}>Mail</th>
-                                    <th style={{ width: '25%' }}>Name</th>
-                                    <th style={{ width: '25%' }}>Surname</th>
-                                    <th style={{ width: '10%' }}>Correspond</th>
-                                    <th style={{ width: '10%' }}>Presenter</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {(controller.state.authors || []).map((author, index) => <tr>
-                                <td>{index + 1}</td>
-                                <td><AuthorSelect
-                                        selected={author.p_mail}
-                                        onChange={value => {
-                                            if(value && value.name) {
-                                                author.name = value.name;
-                                                author.surname = value.surname;
-                                            }
+                        <Validator name="authors" type="required" value={(controller.state.authors || []).length ? 'a' : ''} controller={controller}>
+                            <table className="table table-striped tablo">
+                                <thead>
+                                    <tr>
+                                        <th style={{ width: '5%' }}>#</th>
+                                        <th style={{ width: '25%' }}>Mail</th>
+                                        <th style={{ width: '25%' }}>Name</th>
+                                        <th style={{ width: '25%' }}>Surname</th>
+                                        <th style={{ width: '10%' }}>Correspond</th>
+                                        <th style={{ width: '10%' }}>Presenter</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {(controller.state.authors || []).map((author, index) => <tr>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        <Validator name="author.p_mail" type="required" value={author.p_mail} controller={controller}>
+                                            <AuthorSelect
+                                                selected={author.p_mail}
+                                                onChange={value => {
+                                                    if(value && value.name) {
+                                                        author.name = value.name;
+                                                        author.surname = value.surname;
+                                                    }
 
-                                            author.p_mail = value && (value.p_mail || value.label || value);
-                                            this.forceUpdate();
-                                        }}
-                                    /></td>
-                                <td>
-                                    <Input type="text" value={author.name} onChange={a => {
-                                        author.name = a.currentTarget.value;
-                                        this.forceUpdate();
-                                    }} />
-                                </td>
-                                <td><Input type="text" value={author.surname} onChange={a => {
-                                    author.surname = a.currentTarget.value;
-                                    this.forceUpdate();
-                                }} /></td>
-                                <td><CustomInput
-                                    id={'correspond' + index}
-                                    type="radio"
-                                    checked={ !!author.correspond }
-                                    onChange={_ => {
-                                        author.correspond = !author.correspond;
+                                                    author.p_mail = value && (value.p_mail || value.label || value);
+                                                    this.forceUpdate();
+                                                }}
+                                            />
+                                        </Validator>
+                                    </td>
+                                    <td>
+                                        <Validator name="author.name" type="required" value={author.name} controller={controller}>
+                                            <Input type="text" value={author.name} onChange={a => {
+                                                author.name = a.currentTarget.value;
+                                                this.forceUpdate();
+                                            }} />
+                                        </Validator>
+                                    </td>
+                                    <td>
+                                        <Validator name="author.surname" type="required" value={author.surname} controller={controller}>
+                                            <Input type="text" value={author.surname} onChange={a => {
+                                                author.surname = a.currentTarget.value;
+                                                this.forceUpdate();
+                                            }} />
+                                        </Validator>
+                                    </td>
+                                    <td>
+                                        <Validator name="correspond" type="required" value={ (controller.state.authors || []).find(a => a.correspond) ? 'ok' : '' } controller={controller}>
+                                            <CustomInput
+                                                id={'correspond' + index}
+                                                type="radio"
+                                                checked={ !!author.correspond }
+                                                onChange={_ => {
+                                                    author.correspond = !author.correspond;
 
-                                        if(author.correspond) {
-                                            for(let _author of controller.state.authors) {
-                                                if(author !== _author) {
-                                                    _author.correspond = false;
-                                                }
-                                            }
-                                        }
+                                                    if(author.correspond) {
+                                                        for(let _author of controller.state.authors) {
+                                                            if(author !== _author) {
+                                                                _author.correspond = false;
+                                                            }
+                                                        }
+                                                    }
 
-                                        this.forceUpdate();
-                                    }}
-                                /></td>
-                                <td><CustomInput
-                                    id={'presenter' + index}
-                                    type="radio"
-                                    checked={ !!author.presenter }
-                                    onChange={_ => {
-                                        author.presenter = !author.presenter;
+                                                    this.forceUpdate();
+                                                }}
+                                            />
+                                        </Validator>
+                                    </td>
+                                    <td>
+                                        <Validator name="presenter" type="required" value={ (controller.state.authors || []).find(a => a.presenter) ? 'ok' : '' } controller={controller}>
+                                            <CustomInput
+                                                id={'presenter' + index}
+                                                type="radio"
+                                                checked={ !!author.presenter }
+                                                onChange={_ => {
+                                                    author.presenter = !author.presenter;
 
-                                        if(author.presenter) {
-                                            for(let _author of controller.state.authors) {
-                                                if(author !== _author) {
-                                                    _author.presenter = false;
-                                                }
-                                            }
-                                        }
+                                                    if(author.presenter) {
+                                                        for(let _author of controller.state.authors) {
+                                                            if(author !== _author) {
+                                                                _author.presenter = false;
+                                                            }
+                                                        }
+                                                    }
 
-                                        this.forceUpdate();
-                                    }}
-                                /></td>
-                            </tr>)}
-                            </tbody>
-                        </table>
-
+                                                    this.forceUpdate();
+                                                }}
+                                            />
+                                        </Validator>
+                                    </td>
+                                    <td>
+                                        <Button size="sm" outline color="danger" onClick={_ => controller.setState({ authors: controller.state.authors.filter(a => a !== author)  })}>
+                                            <i className="fa fa-trash" />
+                                        </Button>
+                                    </td>
+                                </tr>)}
+                                </tbody>
+                            </table>
+                        </Validator>
                         <Button color="primary" onClick={a => controller.setState({ authors: (controller.state.authors || []).concat([{  }]) })}>Add Author</Button>
                     </>
                 }

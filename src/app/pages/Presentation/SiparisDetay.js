@@ -25,6 +25,7 @@ import Moment from 'react-moment';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {Portlet, PortletBody, PortletHeader} from "../../partials/content/Portlet";
+import { tokenized } from '../../api';
 
 class CustomPanel extends Component {
     state = {on: true};
@@ -53,7 +54,7 @@ export default class SiparisDetay extends Component {
 
     render() {
         return (  <Portlet>
-            <PortletHeader title="Sunum Detay" />
+            <PortletHeader title="Questions" />
                 <PortletBody>
                 <Table striped bordered>
                     <thead>
@@ -78,21 +79,10 @@ export default class SiparisDetay extends Component {
                                         <Button color="primary" onClick={a => {
                                             row.updated_at = null;
                                             this.setState({editingRow: null});
+                                            this.props.onSave();
                                         }}>Guncelle</Button>
                                     </ButtonGroup> : <ButtonGroup>
-                                        {!row.id && <Button color="danger" size="sm"  onClick={a => {
-                                            this.props.onChange(this.props.value.filter(a => a !== row));
-                                        }}>Sil</Button>}
                                         <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Duzenle</Button>
-                                        <Button color="primary" size="sm"  onClick={a => {
-                                            var obj = {
-                                                user: {name: 'You'},
-                                                isicerik: row.isicerik
-                                            };
-
-                                            this.props.onChange((this.props.value || []).concat([obj]));
-                                            this.setState({editingRow: obj});
-                                        }}>Kopyala</Button>
                                     </ButtonGroup>}
                                 </td>
                             </tr>
@@ -117,13 +107,20 @@ export default class SiparisDetay extends Component {
                     </tbody>
                 </Table>
                 <Button color="primary" onClick={a => {
+                    if(this.state.editingRow) {
+                        this.state.editingRow.updated_at = null;
+                        this.setState({editingRow: null});
+                        this.props.onSave();
+                        return ;
+                    }
+
                     var obj = {
                         user: {name: 'You'}
                     };
 
                     this.props.onChange((this.props.value || []).concat([obj]));
                     this.setState({editingRow: obj});
-                }}>Yeni Ekle</Button>
+                }}>{ this.state.editingRow ? 'Kaydet' : 'Yeni Ekle' }</Button>
                 </PortletBody>
             </Portlet>
         );

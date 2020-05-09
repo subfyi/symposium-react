@@ -37,7 +37,7 @@ export default class GenelForm extends Component {
   }
 
   async save(e) {
-    e.preventDefault();
+    e && e.preventDefault();
 
     if(this.loading)
       return ;
@@ -70,6 +70,12 @@ export default class GenelForm extends Component {
   }
 
   render() {
+    if(this.props.noCard) {
+      return <>
+        { this.props.children(this) }
+      </>;
+    }
+
     return (
       <div className="animated fadeIn">
         <Card>

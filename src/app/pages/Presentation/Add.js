@@ -21,110 +21,72 @@ import {
 import SingleFilePicker, {fix_url} from '../../upload/SingleFilePicker';
 
 import Moment from 'react-moment';
+import GenelForm from '../../common/GenelForm';
 
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {Portlet, PortletBody, PortletHeader} from "../../partials/content/Portlet";
+import {Portlet, PortletBody, PortletHeader, PortletHeaderToolbar} from "../../partials/content/Portlet";
+import SiparisDetay from './SiparisDetay';
+import AspectRatio from 'react-aspect-ratio';
+import 'react-aspect-ratio/aspect-ratio.css'
+
 
 class CustomPanel extends Component {
-    state = {on: true};
+    state = { on: false };
+
+    componentWillMount() {
+        this.setState({ on: !!this.props.open });
+    }
 
     render() {
-        return <Card className="mb-5">
-            <CardHeader onClick={a => {
-                this.setState({on: !this.state.on});
-            }} style={{cursor: 'pointer'}}>
-                <i className="fa fa-align-justify"></i>
-                {' '}{this.props.label}
-
-                {!this.state.on && <i className="fa fa-eye"></i>}
-
-            </CardHeader>
-            <CardBody>
-                {this.state.on && this.props.children}
-            </CardBody>
-        </Card>;
+        return <Portlet>
+            <PortletHeader
+                title={ this.props.title }
+                toolbar={<PortletHeaderToolbar>
+                    <button
+                        type="button"
+                        onClick={() => this.setState({
+                            on: !this.state.on
+                        })}
+                        className="btn btn-clean btn-sm btn-icon btn-icon-md ng-star-inserted"
+                    >
+                        <i className="la la-code" />
+                    </button>
+                </PortletHeaderToolbar>} />
+            { this.state.on && <PortletBody>
+                { this.props.children }
+            </PortletBody> }
+        </Portlet>;
     }
 }
 
-
-export default class SiparisDetay extends Component {
-    state = {};
-
+export default class AddPresentation extends Component {
     render() {
-        return (  <Portlet>
-                <PortletHeader title="Sunum Detay" />
-                <PortletBody>
-                    <Table striped bordered>
-                        <thead>
-                        <tr>
-                            <th style={{ width: '30%' }}>Sahibi</th>
-                            <th style={{ width: '20%' }}>Oluşturma</th>
-                            <th style={{ width: '20%' }}>Güncelleme</th>
-                            <th style={{ width: '20%' }}>Geçen</th>
-                            <th style={{ width: '10%' }}>İşlem</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            (this.props.value || []).map(row => <>
-                                <tr>
-                                    <td>{(row.user && row.user.name) || 'You'}</td>
-                                    <td>{row.created_at || "Simdi"}</td>
-                                    <td>{row.updated_at || "Simdi"}</td>
-                                    <td><Moment fromNow ago>{row.created_at}</Moment></td>
-                                    <td className="d-flex flex-column">
-                                        {this.state.editingRow === row ? <ButtonGroup>
-                                            <Button color="primary" onClick={a => {
-                                                row.updated_at = null;
-                                                this.setState({editingRow: null});
-                                            }}>Update</Button>
-                                        </ButtonGroup> : <ButtonGroup>
-                                            {!row.id && <Button color="danger" size="sm"  onClick={a => {
-                                                this.props.onChange(this.props.value.filter(a => a !== row));
-                                            }}>Delete</Button>}
-                                            <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Duzenle</Button>
-                                            <Button color="primary" size="sm"  onClick={a => {
-                                                var obj = {
-                                                    user: {name: 'You'},
-                                                    isicerik: row.isicerik
-                                                };
-
-                                                this.props.onChange((this.props.value || []).concat([obj]));
-                                                this.setState({editingRow: obj});
-                                            }}>Copy</Button>
-                                        </ButtonGroup>}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5">
-
-                                        {this.state.editingRow === row ? <>
-                                            <CKEditor
-                                                editor={ClassicEditor}
-                                                data={(row.initialData || (row.initialData = row.isicerik)) || ""}
-                                                onChange={(event, editor) => {
-                                                    const data = editor.getData();
-                                                    row.isicerik = data;
-                                                }}
-                                            />
-                                        </> : <div className="icerik-alani" dangerouslySetInnerHTML={{__html: row.isicerik}}/>}
-                                    </td>
-                                </tr>
-                            </>)
-                        }
-                        </tbody>
-                    </Table>
-                    <Button color="primary" onClick={a => {
-                        var obj = {
-                            user: {name: 'You'}
-                        };
-
-                        this.props.onChange((this.props.value || []).concat([obj]));
-                        this.setState({editingRow: obj});
-                    }}>Add Question</Button>
-                </PortletBody>
-            </Portlet>
-        );
+        return <>
+            <GenelForm
+                noCard
+                noSave
+                key={this.props.match.params.id || 0}
+                url="/api/submission"
+                id={this.props.match.params.id}
+                {...this.props}
+            >
+                {
+                    controller => <>
+                        <CustomPanel open title="Video">
+                            <AspectRatio ratio="16/9" style={{ width: '100%' }}>
+                                <iframe style={{ width: '100%' }} frameBorder="0" src={controller.state.video_presentation_url} allowFullScreen />
+                            </AspectRatio>
+                        </CustomPanel>
+                        
+                        <SiparisDetay
+                            value={controller.state.icerikler}
+                            onChange={val => controller.setState({icerikler: val})}
+                            onSave={() => controller.save()}
+                        />
+                    </>
+                }
+            </GenelForm>
+        </>;
     }
 }
