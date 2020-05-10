@@ -72,10 +72,10 @@ export default class AddPresentation extends Component {
                 {...this.props}
             >
                 {
-                    controller => <>
+                    controller => controller.state && controller.state.video && <>
                         <CustomPanel open title="Video">
                             <AspectRatio ratio="16/9" style={{ width: '100%' }}>
-                                <iframe style={{ width: '100%' }} frameBorder="0" src={controller.state.video_presentation_url} allowFullScreen />
+                                <iframe style={{ width: '100%' }} frameBorder="0" src={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} allowFullScreen />
                             </AspectRatio>
                         </CustomPanel>
                         

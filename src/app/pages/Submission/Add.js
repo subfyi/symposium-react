@@ -26,6 +26,7 @@ import ParameterSelect from '../../common/ParameterSelect';
 import SingleFilePicker from '../../upload/SingleFilePicker';
 import { controllers } from 'chart.js';
 import { tokenized } from '../../api';
+import GDriveSingleFilePicker from '../../upload/GDriveSingleFilePicker';
 
 export default class Add extends Component {
     state = {};
@@ -183,22 +184,13 @@ export default class Add extends Component {
                                 <Label htmlFor="text-input">Presentation File (.mp4)</Label>
                             </Col>
                             <Col xs="12" md="9">
-                                <SingleFilePicker
+                                <GDriveSingleFilePicker
                                     accepts="video/mp4"
                                     value={controller.state.video}
                                     onChange={a => controller.setState({ video: a })}
                                 />
                             </Col>
                         </FormGroup>
-                        { this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
-                            <Col md="3">
-                                <Label htmlFor="text-input">Video IFrame URL</Label>
-                            </Col>
-                            <Col xs="12" md="9">
-                                <Input type="text" value={controller.state.video_presentation_url} rows="3"
-                                    onChange={a => controller.setState({video_presentation_url: a.currentTarget.value})} />
-                            </Col>
-                        </FormGroup> }
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Prefered Publish Type</Label>
