@@ -191,6 +191,22 @@ export default class Add extends Component {
                                 />
                             </Col>
                         </FormGroup>
+                        { controller.state.video && this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Video Approved</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <CustomInput
+                                    id="video_approved"
+                                    type="checkbox"
+                                    checked={!!controller.state.video_approved}
+                                    onChange={a => controller.setState({ video_approved: a.currentTarget.checked ? 1 : 0 })}
+                                />
+                                <a href={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} target="_blank" className="mt-2 btn btn-sm btn-outline-primary">
+                                    Watch Video
+                                </a>
+                            </Col>
+                        </FormGroup> }
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Prefered Publish Type</Label>
