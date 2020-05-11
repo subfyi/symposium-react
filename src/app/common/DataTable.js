@@ -63,7 +63,7 @@ export default class DataTable extends Component {
 
     render() {
         if (!this.state.data)
-            return <div>Yukleniyor...</div>;
+            return <div>Loading...</div>;
 
         return <div>
             <FormGroup row>

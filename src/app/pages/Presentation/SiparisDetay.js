@@ -82,7 +82,7 @@ export default class SiparisDetay extends Component {
                                             this.props.onSave();
                                         }}>Guncelle</Button>
                                     </ButtonGroup> : <ButtonGroup>
-                                        <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Duzenle</Button>
+                                        <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Edit</Button>
                                     </ButtonGroup>}
                                 </td>
                             </tr>
@@ -120,7 +120,7 @@ export default class SiparisDetay extends Component {
 
                     this.props.onChange((this.props.value || []).concat([obj]));
                     this.setState({editingRow: obj});
-                }}>{ this.state.editingRow ? 'Kaydet' : 'Yeni Ekle' }</Button>
+                }}>{ this.state.editingRow ? 'Save' : 'Add New' }</Button>
                 </PortletBody>
             </Portlet>
         );
