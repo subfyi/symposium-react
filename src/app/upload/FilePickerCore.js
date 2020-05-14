@@ -102,7 +102,7 @@ export default class FilePickerCore extends Component {
       console.log(controller);
       return <div className={this.props.className}>
         <a href="#" className="btn btn-outline-danger btn-sm" onClick={this.sil.bind(this)}><i className="fa fa-trash" /></a>
-        &nbsp;<a href={"https://iseser.com" + controller.$src} target="_blank" className="btn btn-sm btn-outline-primary"><i className="fa fa-download" /> { controller.name }</a>
+        &nbsp;<a href={"https://api.iseser.com" + controller.$src} target="_blank" className="btn btn-sm btn-outline-primary"><i className="fa fa-download" /> { controller.name }</a>
         <span>&nbsp;({ prettysize(controller.$size) })</span>
       </div>;
     }
