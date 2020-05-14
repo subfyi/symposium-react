@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Badge, Card, FormGroup, Input, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 
-import { tokenized } from '../api';
+import { free, tokenized } from '../api';
 import  axios from 'axios';
 
 import AsyncSelect from 'react-select/async';
@@ -9,6 +9,8 @@ import AsyncSelect from 'react-select/async';
 export default class ParameterSelect extends Component {
   constructor(props) {
     super(props);
+
+    this.http = props.free ? free : tokenized;
 
     this.state = {
 
@@ -22,7 +24,7 @@ export default class ParameterSelect extends Component {
       if(this.props.cachedValue && this.props.value == this.props.cachedValue.id) {
         data = this.props.cachedValue;
       } else {
-        data = (await tokenized.get(`/api/parameters${(this.props.ptur && `-${this.props.ptur}`) || ''}/${this.props.type}/${this.props.value}`)).data;
+        data = (await this.http.get(`/api/parameters${(this.props.ptur && `-${this.props.ptur}`) || ''}/${this.props.type}/${this.props.value}`)).data;
       }
 
       this.setState({ selected: ({ value: data.id, label: data.value }) });
@@ -36,7 +38,7 @@ export default class ParameterSelect extends Component {
       if(this.props.cachedValue && this.props.value == this.props.cachedValue.id) {
         data = this.props.cachedValue;
       } else {
-        data = (await tokenized.get(`/api/parameters${(this.props.ptur && `-${this.props.ptur}`) || ''}/${this.props.type}/${this.props.value}`)).data;
+        data = (await this.http.get(`/api/parameters${(this.props.ptur && `-${this.props.ptur}`) || ''}/${this.props.type}/${this.props.value}`)).data;
       }
 
       this.setState({ selected: ({ value: data.id, label: data.value }) });
@@ -55,7 +57,7 @@ export default class ParameterSelect extends Component {
 
     this.cancelToken = axios.CancelToken.source();
 
-    var data = await tokenized.get(`/api/parameters${(this.props.ptur && `-${this.props.ptur}`) || ''}/${this.props.type}`, { params: { query: arama }, cancelToken: this.cancelToken.token });
+    var data = await this.http.get(`/api/parameters${(this.props.ptur && `-${this.props.ptur}`) || ''}/${this.props.type}`, { params: { query: arama }, cancelToken: this.cancelToken.token });
     return data.data.data
       .map(data => ({ value: data.id, label: data.value }));
   }

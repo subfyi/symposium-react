@@ -7,7 +7,7 @@ export default class Validator extends Component {
     var error = this.props.controller.validator.message(this.props.name, this.props.value || this.props.controller.state[this.props.name], this.props.type);
 
     var a = this.props.children;
-    a = React.cloneElement(a, { invalid: !!error, className: (a.props.className || '') + (!!error ? ' is-invalid' : '') });
+    a = a && React.cloneElement(a, { invalid: !!error, className: ((a.props && a.props.className) || '') + (!!error ? ' is-invalid' : '') });
 
     return <>
       {a}

@@ -73,11 +73,11 @@ export default function AuthPage() {
 
             <div className="kt-grid__item kt-grid__item--fluid  kt-grid__item--order-tablet-and-mobile-1  kt-login__wrapper">
               <Switch>
+                <Redirect from="/" exact={true} to="/auth/login" />
                 <Redirect from="/auth" exact={true} to="/auth/login" />
 
                 <Route path="/auth/login" component={Login} />
-                <Link to="https://iseser.com/register" component={Registration} />
-
+                <Route path="/auth/registration" component={Registration} />
               </Switch>
             </div>
           </div>
