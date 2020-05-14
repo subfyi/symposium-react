@@ -44,7 +44,7 @@ export default {
                     },
                     {
                         title: "Old Symposiums",
-                        page: "https://iseser.com/documents/all",
+                        page: "https://iseser.com/documents-all",
                         bullet: "line",
                     },
                     {

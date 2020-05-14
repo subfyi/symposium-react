@@ -71,8 +71,8 @@ export default class SiparisDetay extends Component {
                         (this.props.value || []).map(row => <>
                             <tr>
                                 <td>{(row.user && row.user.name) || 'You'}</td>
-                                <td>{row.created_at || "Simdi"}</td>
-                                <td>{row.updated_at || "Simdi"}</td>
+                                <td>{row.created_at || "Now"}</td>
+                                <td>{row.updated_at || "Now"}</td>
                                 <td><Moment fromNow ago>{row.created_at}</Moment></td>
                                 <td className="d-flex flex-column">
                                     {this.state.editingRow === row ? <ButtonGroup>

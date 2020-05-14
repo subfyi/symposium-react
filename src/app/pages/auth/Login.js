@@ -34,9 +34,9 @@ function Login(props) {
           Don't have an account yet?
         </span>
         &nbsp;&nbsp;
-        <a target="_blank" href="https://iseser.com/register" className="kt-link kt-login__signup-link">
+        <Link to="/auth/registration" className="kt-link kt-login__signup-link">
           Sign Up!
-        </a>
+        </Link>
       </div>
 
       <div className="kt-login__body">

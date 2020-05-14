@@ -20,41 +20,41 @@ import * as routerHelpers from "../router/RouterHelpers";
 import { is_logged_in } from "../api";
 
 export const Routes = withRouter(({ history }) => {
-  const lastLocation = useLastLocation();
-  routerHelpers.saveLastLocation(lastLocation);
-  const { isAuthorized, menuConfig, userLastLocation } = useSelector(
-    ({ auth, urls, builder: { menuConfig } }) => ({
-      menuConfig,
-      isAuthorized: is_logged_in(),
-      userLastLocation: routerHelpers.getLastLocation()
-    }),
-    shallowEqual
-  );
+    const lastLocation = useLastLocation();
+    routerHelpers.saveLastLocation(lastLocation);
+    const { isAuthorized, menuConfig, userLastLocation } = useSelector(
+        ({ auth, urls, builder: { menuConfig } }) => ({
+            menuConfig,
+            isAuthorized: auth.user != null,
+            userLastLocation: routerHelpers.getLastLocation()
+        }),
+        shallowEqual
+    );
 
-  return (
-    /* Create `LayoutContext` from current `history` and `menuConfig`. */
-    <LayoutContextProvider history={history} menuConfig={menuConfig}>
-      <Switch>
-        {!isAuthorized ? (
-          /* Render auth page when user at `/auth` and not authorized. */
-          <Route path="/auth/login" component={AuthPage} />
-        ) : (
-          /* Otherwise redirect to root page (`/`) */
-          <Redirect from="/auth" to={userLastLocation} />
-        )}
+    return (
+        /* Create `LayoutContext` from current `history` and `menuConfig`. */
+        <LayoutContextProvider history={history} menuConfig={menuConfig}>
+            <Switch>
+                {!isAuthorized ? (
+                    /* Render auth page when user at `/auth` and not authorized. */
+                    <AuthPage />
+                ) : (
+                    /* Otherwise redirect to root page (`/`) */
+                    <Redirect from="/auth" to={userLastLocation} />
+                )}
 
-        <Route path="/error" component={ErrorsPage} />
-        <Route path="/logout" component={LogoutPage} />
+                <Route path="/error" component={ErrorsPage} />
+                <Route path="/logout" component={LogoutPage} />
 
-        {!isAuthorized ? (
-          /* Redirect to `/auth` when user is not authorized */
-          <Redirect to="/auth/login" />
-        ) : (
-          <Layout>
-            <HomePage userLastLocation={userLastLocation} />
-          </Layout>
-        )}
-      </Switch>
-    </LayoutContextProvider>
-  );
+                {!isAuthorized ? (
+                    /* Redirect to `/auth` when user is not authorized */
+                    <Redirect to="/auth/login" />
+                ) : (
+                    <Layout>
+                        <HomePage userLastLocation={userLastLocation} />
+                    </Layout>
+                )}
+            </Switch>
+        </LayoutContextProvider>
+    );
 });

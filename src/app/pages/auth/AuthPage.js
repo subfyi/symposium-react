@@ -37,23 +37,20 @@ export default function AuthPage() {
             <div
               className="kt-grid__item kt-grid__item--order-tablet-and-mobile-2 kt-grid kt-grid--hor kt-login__aside"
               style={{
-                backgroundImage: `url(${toAbsoluteUrl("/media/bg/bg-4.jpg")})`
+                backgroundImage: `url(${toAbsoluteUrl("/media/bg/bg-7.jpg")})`
               }}
             >
               <div className="kt-grid__item">
                 <Link to="/" className="kt-login__logo" >
                   <img
                     alt="Logo" className="w-100"
-                    src={toAbsoluteUrl("/logos/logo.big.jpg")}
+                    src={toAbsoluteUrl("/logos/logo.png")}
                   />
                 </Link>
               </div>
               <div className="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver">
                 <div className="kt-grid__item kt-grid__item--middle">
-                  <h3 className="kt-login__title">ISESER</h3>
-                  <h4 className="kt-login__subtitle">
-                    2020
-                  </h4>
+                  <h3 className="kt-login__title">ISESER2020</h3>
                 </div>
               </div>
               <div className="kt-grid__item">
@@ -64,9 +61,6 @@ export default function AuthPage() {
                   <div className="kt-login__menu">
                     <a href="http://www.google.com.tr/search?hl=tr&q=ISESER" target="_blank">
                       G-Arama
-                    </a>
-                    <a href="http://www.alexa.com/siteinfo/iseser.com" target="_blank">
-                      Alexa
                     </a>
                     <a target="_blank" href="https://iseser.com/contact" className="kt-link">
                       Contact

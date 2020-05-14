@@ -86,7 +86,7 @@ export default class GenelForm extends Component {
             { this.props.children(this) }
             <Row>
               <Col xs="12">
-                <a href="#" className="btn btn-primary col-12 mt-4" onClick={this.save.bind(this)}><i className="fa fa-save" /> { this.props.id ? "Save" : "Save" }</a>
+                <a href="#" className="btn btn-primary col-12 mt-4" onClick={this.save.bind(this)}><i className="fa fa-save" /> { this.props.id ? "Edit" : "Save" }</a>
               </Col>
             </Row>
           </CardBody>
