@@ -24,8 +24,8 @@ import AuthorSelect from '../../common/AuthorSelect';
 import MultiParameterSelect from '../../common/MultiParameterSelect';
 import ParameterSelect from '../../common/ParameterSelect';
 import SingleFilePicker from '../../upload/SingleFilePicker';
-import { controllers } from 'chart.js';
-import { tokenized } from '../../api';
+import {controllers} from 'chart.js';
+import {tokenized} from '../../api';
 import GDriveSingleFilePicker from '../../upload/GDriveSingleFilePicker';
 
 export default class Add extends Component {
@@ -33,7 +33,7 @@ export default class Add extends Component {
 
     async componentWillMount() {
         const user = await tokenized.get('/api/myself');
-        this.setState({ user: user.data });
+        this.setState({user: user.data});
     }
 
     render() {
@@ -72,8 +72,8 @@ export default class Add extends Component {
                                     type="required"
                                     controller={controller}>
                                     <Input type="textarea"
-                                    rows="10"
-                                    value={controller.state.pap_abstract}
+                                           rows="10"
+                                           value={controller.state.pap_abstract}
                                            onChange={a => controller.setState({pap_abstract: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
@@ -87,10 +87,13 @@ export default class Add extends Component {
                                     name="pap_keyword"
                                     type="required"
                                     controller={controller}>
-                                    <MultiParameterSelect 
+                                    <MultiParameterSelect
                                         type="tagcon"
-                                        selected={(controller.state.pap_keyword || "").split('|').filter(a => a.length).map(a => ({ value: a, label: a }))}
-                                        onChange={a => controller.setState({ pap_keyword: (a && a.join('|')) || "" })}
+                                        selected={(controller.state.pap_keyword || "").split('|').filter(a => a.length).map(a => ({
+                                            value: a,
+                                            label: a
+                                        }))}
+                                        onChange={a => controller.setState({pap_keyword: (a && a.join('|')) || ""})}
                                     />
                                 </Validator>
                             </Col>
@@ -107,7 +110,7 @@ export default class Add extends Component {
                                     <ParameterSelect
                                         type="keywordcon"
                                         value={controller.state.pap_topic_p}
-                                        onChange={a => controller.setState({pap_topic_p: a})} />
+                                        onChange={a => controller.setState({pap_topic_p: a})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -123,7 +126,7 @@ export default class Add extends Component {
                                     <ParameterSelect
                                         type="uygulamacon"
                                         value={controller.state.pre_type}
-                                        onChange={a => controller.setState({pre_type: a})} />
+                                        onChange={a => controller.setState({pre_type: a})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -134,13 +137,13 @@ export default class Add extends Component {
                             <Col xs="12" md="9">
                                 <Validator
                                     name="abstract_dosya"
-                                    value={ controller.state.abstract_dosya || controller.state.full_paper_dosya || controller.state.poster_presentation_dosya }
+                                    value={controller.state.abstract_dosya || controller.state.full_paper_dosya || controller.state.poster_presentation_dosya}
                                     type="file"
                                     controller={controller}>
-                                        <SingleFilePicker
-                                            value={controller.state.abstract_dosya}
-                                            onChange={a => controller.setState({ abstract_dosya: a })}
-                                        />
+                                    <SingleFilePicker
+                                        value={controller.state.abstract_dosya}
+                                        onChange={a => controller.setState({abstract_dosya: a})}
+                                    />
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -154,10 +157,10 @@ export default class Add extends Component {
                                     value={controller.state.abstract_dosya || controller.state.full_paper_dosya || controller.state.poster_presentation_dosya}
                                     type="file"
                                     controller={controller}>
-                                        <SingleFilePicker
-                                            value={controller.state.full_paper_dosya}
-                                            onChange={a => controller.setState({ full_paper_dosya: a })}
-                                        />
+                                    <SingleFilePicker
+                                        value={controller.state.full_paper_dosya}
+                                        onChange={a => controller.setState({full_paper_dosya: a})}
+                                    />
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -172,10 +175,10 @@ export default class Add extends Component {
 
                                     type="file"
                                     controller={controller}>
-                                        <SingleFilePicker
-                                            value={controller.state.poster_presentation_dosya}
-                                            onChange={a => controller.setState({ poster_presentation_dosya: a })}
-                                        />
+                                    <SingleFilePicker
+                                        value={controller.state.poster_presentation_dosya}
+                                        onChange={a => controller.setState({poster_presentation_dosya: a})}
+                                    />
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -187,11 +190,11 @@ export default class Add extends Component {
                                 <GDriveSingleFilePicker
                                     accepts="video/mp4"
                                     value={controller.state.video}
-                                    onChange={a => controller.setState({ video: a })}
+                                    onChange={a => controller.setState({video: a})}
                                 />
                             </Col>
                         </FormGroup>
-                        { controller.state.video && this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                        {controller.state.video && this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Video Approved</Label>
                             </Col>
@@ -200,13 +203,24 @@ export default class Add extends Component {
                                     id="video_approved"
                                     type="checkbox"
                                     checked={!!controller.state.video_approved}
-                                    onChange={a => controller.setState({ video_approved: a.currentTarget.checked ? 1 : 0 })}
+                                    onChange={a => controller.setState({video_approved: a.currentTarget.checked ? 1 : 0})}
                                 />
-                                <a href={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} target="_blank" className="mt-2 btn btn-sm btn-outline-primary">
+                                <a href={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} target="_blank"
+                                   className="mt-2 btn btn-sm btn-outline-primary">
                                     Watch Video
                                 </a>
                             </Col>
-                        </FormGroup> }
+                        </FormGroup>}
+
+                        {this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">title_year</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <Input type="text" value={controller.state.title_year}
+                                       onChange={a => controller.setState({title_year: a.currentTarget.value})}/>
+                            </Col>
+                        </FormGroup>}
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Prefered Publish Type</Label>
@@ -219,7 +233,7 @@ export default class Add extends Component {
                                     <ParameterSelect
                                         type="birimcon"
                                         value={controller.state.pap_type}
-                                        onChange={a => controller.setState({pap_type: a})} />
+                                        onChange={a => controller.setState({pap_type: a})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -229,22 +243,22 @@ export default class Add extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <Input type="textarea" value={controller.state.mes_congress} rows="3"
-                                    onChange={a => controller.setState({mes_congress: a.currentTarget.value})}/>
+                                       onChange={a => controller.setState({mes_congress: a.currentTarget.value})}/>
                             </Col>
                         </FormGroup>
 
                         <Validator name="authors" type="required" value={(controller.state.authors || []).length ? 'a' : ''} controller={controller}>
                             <table className="table table-striped tablo">
                                 <thead>
-                                    <tr>
-                                        <th style={{ width: '5%' }}>#</th>
-                                        <th style={{ width: '25%' }}>Mail</th>
-                                        <th style={{ width: '25%' }}>Name</th>
-                                        <th style={{ width: '25%' }}>Surname</th>
-                                        <th style={{ width: '10%' }}>Correspond</th>
-                                        <th style={{ width: '10%' }}>Presenter</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th style={{width: '5%'}}>#</th>
+                                    <th style={{width: '25%'}}>Mail</th>
+                                    <th style={{width: '25%'}}>Name</th>
+                                    <th style={{width: '25%'}}>Surname</th>
+                                    <th style={{width: '10%'}}>Correspond</th>
+                                    <th style={{width: '10%'}}>Presenter</th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 {(controller.state.authors || []).map((author, index) => <tr>
@@ -254,7 +268,7 @@ export default class Add extends Component {
                                             <AuthorSelect
                                                 selected={author.p_mail}
                                                 onChange={value => {
-                                                    if(value && value.name) {
+                                                    if (value && value.name) {
                                                         author.name = value.name;
                                                         author.surname = value.surname;
                                                     }
@@ -270,7 +284,7 @@ export default class Add extends Component {
                                             <Input type="text" value={author.name} onChange={a => {
                                                 author.name = a.currentTarget.value;
                                                 this.forceUpdate();
-                                            }} />
+                                            }}/>
                                         </Validator>
                                     </td>
                                     <td>
@@ -278,21 +292,23 @@ export default class Add extends Component {
                                             <Input type="text" value={author.surname} onChange={a => {
                                                 author.surname = a.currentTarget.value;
                                                 this.forceUpdate();
-                                            }} />
+                                            }}/>
                                         </Validator>
                                     </td>
                                     <td>
-                                        <Validator name="correspond" type="required" value={ (controller.state.authors || []).find(a => a.correspond) ? 'ok' : '' } controller={controller}>
+                                        <Validator name="correspond" type="required"
+                                                   value={(controller.state.authors || []).find(a => a.correspond) ? 'ok' : ''}
+                                                   controller={controller}>
                                             <CustomInput
                                                 id={'correspond' + index}
                                                 type="radio"
-                                                checked={ !!author.correspond }
+                                                checked={!!author.correspond}
                                                 onChange={_ => {
                                                     author.correspond = !author.correspond;
 
-                                                    if(author.correspond) {
-                                                        for(let _author of controller.state.authors) {
-                                                            if(author !== _author) {
+                                                    if (author.correspond) {
+                                                        for (let _author of controller.state.authors) {
+                                                            if (author !== _author) {
                                                                 _author.correspond = false;
                                                             }
                                                         }
@@ -304,17 +320,19 @@ export default class Add extends Component {
                                         </Validator>
                                     </td>
                                     <td>
-                                        <Validator name="presenter" type="required" value={ (controller.state.authors || []).find(a => a.presenter) ? 'ok' : '' } controller={controller}>
+                                        <Validator name="presenter" type="required"
+                                                   value={(controller.state.authors || []).find(a => a.presenter) ? 'ok' : ''}
+                                                   controller={controller}>
                                             <CustomInput
                                                 id={'presenter' + index}
                                                 type="radio"
-                                                checked={ !!author.presenter }
+                                                checked={!!author.presenter}
                                                 onChange={_ => {
                                                     author.presenter = !author.presenter;
 
-                                                    if(author.presenter) {
-                                                        for(let _author of controller.state.authors) {
-                                                            if(author !== _author) {
+                                                    if (author.presenter) {
+                                                        for (let _author of controller.state.authors) {
+                                                            if (author !== _author) {
                                                                 _author.presenter = false;
                                                             }
                                                         }
@@ -326,15 +344,17 @@ export default class Add extends Component {
                                         </Validator>
                                     </td>
                                     <td>
-                                        <Button size="sm" outline color="danger" onClick={_ => controller.setState({ authors: controller.state.authors.filter(a => a !== author)  })}>
-                                            <i className="fa fa-trash" />
+                                        <Button size="sm" outline color="danger"
+                                                onClick={_ => controller.setState({authors: controller.state.authors.filter(a => a !== author)})}>
+                                            <i className="fa fa-trash"/>
                                         </Button>
                                     </td>
                                 </tr>)}
                                 </tbody>
                             </table>
                         </Validator>
-                        <Button color="primary" onClick={a => controller.setState({ authors: (controller.state.authors || []).concat([{  }]) })}>Add Author</Button>
+                        <Button color="primary" onClick={a => controller.setState({authors: (controller.state.authors || []).concat([{}])})}>Add
+                            Author</Button>
                     </>
                 }
             </CommonForm>
