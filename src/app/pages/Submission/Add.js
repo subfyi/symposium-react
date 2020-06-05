@@ -57,7 +57,10 @@ export default class Add extends Component {
                                     name="pap_title"
                                     type="required"
                                     controller={controller}>
-                                    <Input type="text" value={controller.state.pap_title}
+                                    <Input type="text"
+                                        disabled={!!controller.state.paper_approved && !(this.state.user && this.state.user.yetki >= 8)}
+                                    
+                                    value={controller.state.pap_title}
                                            onChange={a => controller.setState({pap_title: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
@@ -73,6 +76,7 @@ export default class Add extends Component {
                                     controller={controller}>
                                     <Input type="textarea"
                                            rows="10"
+                                           disabled={!!controller.state.paper_approved && !(this.state.user && this.state.user.yetki >= 8)}
                                            value={controller.state.pap_abstract}
                                            onChange={a => controller.setState({pap_abstract: a.currentTarget.value})}/>
                                 </Validator>
@@ -209,6 +213,20 @@ export default class Add extends Component {
                                    className="mt-2 btn btn-sm btn-outline-primary">
                                     Watch Video
                                 </a>
+                            </Col>
+                        </FormGroup>}
+
+                        {this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Paper Approved</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <CustomInput
+                                    id="paper_approved"
+                                    type="checkbox"
+                                    checked={!!controller.state.paper_approved}
+                                    onChange={a => controller.setState({paper_approved: a.currentTarget.checked ? 1 : 0})}
+                                />
                             </Col>
                         </FormGroup>}
 
