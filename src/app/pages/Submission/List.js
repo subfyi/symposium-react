@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Card, CardBody} from 'reactstrap';
 import GenelList from '../../common/GenelList';
 
+import {FormattedMessage} from "react-intl";
 import FileDownload from '../../common/FileDownload';
  
 export default class List extends Component {

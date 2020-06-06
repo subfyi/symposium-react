@@ -1,75 +1,103 @@
-
-import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import React, {Component} from 'react';
+import {Card, CardBody} from 'reactstrap';
 
 import DataTable from './DataTable';
-import { tokenized, hatagoster } from '../api';
+import {tokenized, hatagoster} from '../api';
 import swal2 from 'sweetalert2';
 import '../customcss.css';
-import { Link } from 'react-router-dom';
+import {FormattedMessage, injectIntl} from 'react-intl';
+import Col from "react-bootstrap/Col";
 
-export default class GenelList extends Component {
-  constructor(props) {
-    super(props);
+export default injectIntl(class GenelList extends Component {
+    constructor(props) {
+        super(props);
 
-    this.dataTable = React.createRef();
-  }
-
-  async handleDelete(parameter, e) {
-    e.preventDefault();
-
-    var modal = await swal2.fire({
-      title: 'Are you sure?',
-      text: "You can not get it back!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!'
-    });
-
-    if(!modal.value) {
-      return ;
+        this.dataTable = React.createRef();
     }
 
-    var hata = await hatagoster(tokenized.delete(`${this.props.url}/${parameter.id}`));
+    async handleDelete(parameter, e) {
+        e.preventDefault();
 
-    if(!hata) {
-      this.dataTable.current.updateAndReload({}, e);
-      await swal2.fire('Success', 'Record succesccfully deleted!', 'success');
+        var modal = await swal2.fire({
+            title: this.props.intl.formatMessage({id: 'general.are_you_sure'}),
+            text: this.props.intl.formatMessage({id: 'general.u_cannot_undo'}),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: this.props.intl.formatMessage({id: 'general.yes_delete_it'})
+        });
+
+        if (!modal.value) {
+            return;
+        }
+
+        var hata = await hatagoster(tokenized.delete(`${this.props.url}/${parameter.id}`));
+
+        if (!hata) {
+            this.dataTable.current.updateAndReload({}, e);
+            await swal2.fire(
+                this.props.intl.formatMessage({id: 'general.success'}),
+                this.props.intl.formatMessage({id: 'general.delete_success'}),
+                'success');
+        }
     }
-  }
 
-  async handleEdit(parameter, e) {
-    e.preventDefault();
+    async handleEdit(parameter, e) {
+        e.preventDefault();
 
-    this.props.history.push(this.props.edit(parameter.id));
-  }
+        this.props.history.push(this.props.edit(parameter[this.props.idKey || "id"]));
+    }
 
-  render() {
-    return <>
-      <DataTable add={this.props.add} url={this.props.url} ref={this.dataTable} defaultParams={this.props.defaultParams}>
-        <thead>
-          <tr>
-            <th sort="id">#</th>
-            {this.props.children[0]}
-            {(this.props.islem !== false && <th>İşlemler</th>) || null}
-          </tr>
-        </thead>
-        <tbody>
-          {
-            row => <tr key={row.id}>
-              <td>{row.id}</td>
-              {this.props.children[1](row)}
-              {(this.props.islem !== false && <td className="thstyle">
-                {this.props.edit && <Link to={this.props.edit(row.id)} className="btn btn-sm btn-outline-primary"><i className="fas fa-save" /> Save</Link>}
-                {this.props.sil !== false && <a href="#" onClick={this.handleDelete.bind(this, row)} className="btn btn-outline-danger ml-1 btn-sm"><i className="fa fa-trash" /> Delete</a>}
-              </td>) || null}
-            </tr>
-          }
-        </tbody>
-      </DataTable>
-    </>;
-  }
-}
+    async handleAdd(e) {
+        e.preventDefault();
+
+        this.props.history.push(this.props.add);
+    }
+
+    render() {
+        return <>
+            <Card>
+                <CardBody>
+                    <DataTable updateInterval={this.props.updateInterval} name={this.props.name} add={this.props.add}
+                               url={this.props.url} ref={this.dataTable} defaultParams={this.props.defaultParams}>
+                        <thead>
+                        <tr>
+                            <th sort="id">#</th>
+                            {this.props.children[0]}
+                            {(this.props.islem !== false && <th><FormattedMessage id="general.operations"/></th>) || null}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            row => <tr key={row.id} className={this.props.trstyle && this.props.trstyle(row)}>
+                                <td>{row.id}</td>
+                                {this.props.children[1](row)}
+                                {(this.props.islem !== false && <td className="thstyle">
+                                    {this.props.edit && <a href={this.props.edit(row[this.props.idKey || "id"])}
+                                                           className="btn btn-sm btn-outline-primary"><i
+                                        className="fa fa-pencil-alt"/> <FormattedMessage id="general.edit"/></a>}
+                                    <a href="#" onClick={this.handleDelete.bind(this, row)}
+                                       className="btn btn-outline-danger ml-1 btn-sm"><i className="fa fa-trash"/>
+                                        <FormattedMessage id="general.delete"/></a>
+                                </td>) || null}
+                            </tr>
+                        }
+                        </tbody>
+                        {null}
+                        <>
+                            {this.props.add && <Col md="1">
+                                <a href={this.props.add} onClick={this.handleAdd.bind(this)}
+                                   className="btn btn-primary btn-add font-xl btn-block"><i
+                                    className="fas fa-plus"></i> <FormattedMessage id="general.new"/> </a>
+                            </Col>}
+                            {this.props.children[2]}
+                        </>
+                    </DataTable>
+                </CardBody>
+            </Card>
+        </>;
+    }
+});
+
 
