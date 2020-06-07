@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Badge, Card, FormGroup, Input, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
 
 import { tokenized } from '../api';
 import  axios from 'axios';
@@ -37,7 +36,7 @@ export default class MultiParameterSelect extends Component {
 
     var data = await tokenized.get(`/api/author`, { params: { query: arama }, cancelToken: this.cancelToken.token });
     return data.data.data
-      .map(a => ({  name: a.name, surname: a.surname, p_mail: a.p_mail, value: a.id, id: a.id  }));
+      .map(a => ({  name: a.name, surname: a.surname, adress: a.adress, p_mail: a.p_mail,  value: a.id, id: a.id  }));
   }
 
   render() {
