@@ -290,6 +290,7 @@ export default class Add extends Component {
                                                         if (value && value.name) {
                                                             author.name = value.name;
                                                             author.surname = value.surname;
+                                                            author.adress = value.adress;
                                                         }
 
                                                         author.p_mail = value && (value.p_mail || value.label || value);
