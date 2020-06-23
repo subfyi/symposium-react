@@ -1,12 +1,11 @@
-
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
-
+import { default as axios, default as Axios } from 'axios';
 import swal2 from 'sweetalert2';
-import Axios from 'axios';
 
-var isLocal = window.location.host.indexOf('localhost') === 0;
 
-const endpoint = isLocal ? 'http://127.0.0.1:8000/' : 'https://api.iseser.com/';
+var isLocal = window.location.host.indexOf('localhost') === 0 || window.location.host.indexOf('127.0.0.1') === 0;
+
+export const endpoint = isLocal ? 'http://127.0.0.1:8000/' : 'https://api.iseser.com/';
+export const endpointWeb = endpoint.replace(/\/$/, '');
 
 var client_id = '2',
     client_secret = 'JjPIsb7TNCf7ysEfs0JDhl5XXBgIVh6dMRLMCrb9';
@@ -27,7 +26,7 @@ export async function hatagoster(data) {
   } catch(e) {
     if(!Axios.isCancel(e)) {
       console.error('Hata:', e);
-      await swal2.fire('Hata olustu', (e.response && e.response.data && e.response.data.message) || e.message || e || "Hata olustu.", 'error');
+      await swal2.fire('Hata olustu', (e.data && e.data.message) || e.message || e || "Hata olustu.", 'error');
     }
   }
   return 1;
@@ -50,11 +49,22 @@ export function is_logged_in() {
   return !!refresh_token;
 }
 
+var _onLoggedIn;
+
+export function onLoggedIn(callback) {
+  _onLoggedIn = callback;
+}
+
+export function loggedIn() {
+  _onLoggedIn && _onLoggedIn(true);
+}
+
 export function logout() {
   access_token = null;
   refresh_token = null;
   localStorage.removeItem('symposium_access_token');
   localStorage.removeItem('symposium_refresh_token');
+  _onLoggedIn && _onLoggedIn(false);
 }
 
 export async function log_in(username, password) {
@@ -98,7 +108,7 @@ function renew_token() {
 
     access_token = data.data.access_token;
 
-    localStorage.setItem('symposium_access_token', access_token);
+    localStorage.setItem('tt_access_token', access_token);
   }
 }
 
@@ -111,9 +121,9 @@ export function set_hook(start, stop) {
   var data;
 
   function check() {
-    if(count == 1 && !data) {
+    if(count === 1 && !data) {
       data = start();
-    } else if(count == 0) {
+    } else if(count === 0) {
       stop(data);
       data = null;
     }
@@ -169,7 +179,7 @@ tokenized.interceptors.request.use(function(config) {
 });
 
 tokenized.interceptors.response.use(a => a, async function(error) {
-  if(error.response && error.response.status == 401) {
+  if(error.response && error.response.status === 401) {
     await renew_token();
     return tokenized(error.config);
   }

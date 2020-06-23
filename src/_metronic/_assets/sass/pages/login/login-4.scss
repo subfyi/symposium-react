@@ -1,229 +1,257 @@
 //
-// User Login v3
+// Login 5
 // Pages SASS files are compiled into separate css files
 //
 
+// Initialization of global variables, mixins and functions
+@import "../../init";
 
+.login.login-4 {
+    // Container
+    .login-container {
+        .login-content {
+            width: 450px;
 
-// Global config
-@import "../../config";
+            // Wizard Nav
+            .wizard-nav {
+                padding: 0;
 
-// Layout config
-@import "../../global/layout/config.scss";
+                // Steps
+                .wizard-steps {
+                    display: flex;
+                    align-items: center;
 
-// Login Base
-.kt-login.kt-login--v4 {
-    background-size: cover;
-    background-repeat: no-repeat;
+                    // Step
+                    .wizard-step {
+                        padding: 0.75rem 0;
+                        transition: $transition-link;
+                        margin-bottom: 1.5rem;
 
-    // Login Area
-    .kt-login__wrapper {
-        padding: 6% 2rem 1rem 2rem;
-        margin: 0 auto 2rem auto;
-        overflow: hidden;
+                        .wizard-wrapper {
+                            display: flex;
+                            align-items: center;
+                        }
 
-        .kt-login__container {
-            width: 430px;
-            margin: 0 auto;
+                        .wizard-icon {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            transition: $transition-link;
+                            width: 46px;
+                            height: 46px;
+                            border-radius: 12px;
+                            background-color: $gray-100;
+                            margin-right: 1rem;
 
-            .kt-login__logo {
-                text-align: center;
-                margin: 0 auto 4rem auto;
-            }
+                            .wizard-check {
+                                display: none;
+                                font-size: 1.4rem;
+                            }
 
-            .kt-login__head {
-                margin-top: 1rem;
-                margin-bottom: 3rem;
+                            .wizard-number {
+                                font-weight: 600;
+                                color: $dark-75;
+                                font-size: 1.35rem;
+                            }
+                        }
 
-                .kt-login__title {
-                    text-align: center;
-                    font-size: 1.5rem;
-                    font-weight: 500;
-                    color: kt-base-color(label, 3);
-                }
+                        .wizard-label {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
 
-                .kt-login__desc {
-                    margin-top: 1.5rem;
-                    text-align: center;
-                    font-size: 1.1rem;
-                    font-weight: 400;
-                    color: kt-base-color(label, 2);
-                }
-            }
+                            .wizard-title {
+                                color: $dark;
+                                font-weight: 600;
+                                font-size: 1.24rem;
+                            }
 
-            .kt-form {
-                margin: 0 auto;
+                            .wizard-desc {
+                                color: $text-muted;
+                                font-size: $font-size-sm;
+                            }
+                        }
 
-                .input-group {
-                    padding: 0;
-                    margin: 0 auto;
-                }
+                        // Done States
+                        &[data-wizard-state="done"] {
+                            .wizard-icon {
+                                transition: $transition-link;
+                                background-color: $success-light;
 
-                .form-control {
-                    height: 46px;
-                    border: none;
-                    padding-left: 1.5rem;
-                    padding-right: 1.5rem;
-                    border-radius: 46px;
-                    margin-top: 1.5rem;
-                    background: rgba(#fff, 0.015);
-                    color: kt-base-color(label, 2);
-                    @include kt-input-placeholder(kt-base-color(label, 3));
-                }
+                                .wizard-check {
+                                    color: $success;
+                                    display: inline-block;
+                                }
 
-                .form-control.is-valid + .valid-feedback,
-                .form-control.is-invalid + .invalid-feedback {
-                    font-weight: 500;
-                    font-size: 0.9rem;
-                    padding-left: 1.6rem;
-                }
+                                .wizard-number {
+                                    display: none;
+                                }
+                            }
 
-                .kt-login__extra {
-                    margin-top: 30px;
-                    margin-bottom: 15px;
-                    color: kt-base-color(label, 2);
-                    font-size: 1rem;
-                    padding: 0 1.5rem;
+                            .wizard-label {
+                                .wizard-title {
+                                    color: $text-muted;
+                                }
 
-                    .kt-checkbox {
-                        font-size: 1rem;
-                    }
+                                .wizard-desc {
+                                    color: $gray-400;
+                                }
+                            }
+                        }
 
-                    .kt-login__link {
-                        font-size: 1rem;
-                        color: kt-base-color(label, 2);
-                        transition: color 0.3s ease;
+                        // Current States
+                        &[data-wizard-state="current"] {
+                            transition: $transition-link;
 
-                        &:hover {
-                            color: kt-brand-color();
-                            transition: color 0.3s ease;
+                            .wizard-icon {
+                                transition: $transition-link;
+                                background-color: $success-light;
+
+                                .wizard-check {
+                                    color: $success;
+                                    display: none;
+                                }
+
+                                .wizard-number {
+                                    color: $success;
+                                }
+                            }
+
+                            .wizard-label {
+                                .wizard-title {
+                                    color: $dark;
+                                }
+
+                                .wizard-desc {
+                                    color: $gray-500;
+                                }
+                            }
                         }
                     }
                 }
+            }
 
-                .kt-login__actions {
-                    text-align: center;
-                    margin-top: 7%;
+            &.login-content-signup {
+                width: 700px;
+            }
+        }
+    }
 
-                    .kt-login__btn-secondary,
-                    .kt-login__btn-primary {
-                        height: 50px;
-                        padding-left: 2.5rem;
-                        padding-right: 2.5rem;
+    // Aside
+    .login-aside {
+        background: linear-gradient(147.04deg, #CA7B70 0.74%, #5A2119 99.61%);
+         width: 700px;
+
+         .login-conteiner {
+             height: 100%;
+         }
+    }
+}
+
+// Desktop view
+@include media-breakpoint-up(lg) {
+    .login.login-4 {
+        // Aside
+        .login-aside {
+            .login-conteiner {
+                min-height: 610px !important;
+                background-size: 580px;
+            }
+        }
+    }
+}
+
+// Tablet and Mobile mode
+@include media-breakpoint-between(lg, xl) {
+    .login.login-4 {
+        // Aside
+        .login-aside {
+            .login-conteiner {
+                min-height: 420px !important;
+                background-size: 400px;
+            }
+        }
+    }
+}
+
+// Tablet & Mobile Modes
+@include media-breakpoint-down(md) {
+    .login.login-4 {
+        // Container
+        .login-container {
+            // Wizard Nav
+    	    .wizard-nav {
+        		padding: 0;
+                align-content: center;
+
+        		// Steps
+        		.wizard-steps {
+    			    // Step
+    			    .wizard-step {
+                        margin-bottom: .5rem;
+                    }
+                }
+            }
+        }
+
+        // Aside
+        .login-aside {
+            width: 100% !important;
+
+            .login-conteiner {
+                min-height: 210px !important;
+                background-size: 200px;
+            }
+        }
+    }
+}
+
+// Mobile mode
+@include media-breakpoint-down(xs) {
+    .login.login-4 {
+        // Container
+        .login-container {
+            width: 100%;
+            // Wizard
+            .wizard-nav {
+               // Steps
+               .wizard-steps {
+                   display: flex;
+                   flex-direction: column;
+
+                   .wizard-step {
+                        width: 100%;
+
+                        .wizard-wrapper {
+                            .svg-icon {
+                                display:none;
+                            }
+                        }
                     }
                 }
             }
 
-            .kt-login__account {
-                text-align: center;
-                margin-top: 2rem;
-
-                .kt-login__account-msg {
-                    font-size: 1rem;
-                    font-weight: 400;
-                    color:kt-base-color(label, 2);
-                }
-
-                .kt-login__account-link {
-                    font-size: 1rem;
-                    font-weight: 500;
-                    color: kt-base-color(label, 3);
-                    transition: color 0.3s ease;
-
-                    &:hover {
-                        color: kt-brand-color();
-                        transition: color 0.3s ease;
-                    }
-                }
-            }
-        }
-    }
-}
-
-// Login Modes
-.kt-login.kt-login--v4 {
-    &.kt-login--signin {
-        .kt-login__signup {
-            display: none;
-        }
-
-        .kt-login__signin {
-            display: block;
-        }
-
-        .kt-login__forgot {
-            display: none;
-        }
-    }
-
-    &.kt-login--signup {
-        .kt-login__signup {
-            display: block;
-        }
-
-        .kt-login__signin {
-            display: none;
-        }
-
-        .kt-login__forgot {
-            display: none;
-        }
-
-        .kt-login__account {
-            display: none;
-        }
-    }
-
-    &.kt-login--forgot {
-        .kt-login__signup {
-            display: none;
-        }
-
-        .kt-login__signin {
-            display: none;
-        }
-
-        .kt-login__forgot {
-            display: block;
-        }
-    }
-}
-
-@include kt-tablet-and-mobile {
-    .kt-login.kt-login--v4 {
-        .kt-login__wrapper {
-            padding-top: 5rem;
-            width: 100%;
-
-             .kt-login__container {
-                margin: 0 auto;
-
-                .kt-login__account {
-                    margin-top: 1rem;
-                }
-            }
-        }
-    }
-}
-
-@include kt-mobile() {
-    .kt-login.kt-login--v4 {
-        .kt-login__wrapper {
-            width: 100%;
-
-            .kt-login__container {
+            .login-content{
                 width: 100%;
-                margin: 0 auto;
 
-                .kt-form {
+                &.login-content-signup {
                     width: 100%;
-                    margin: 0 auto;
-                }
-
-                .kt-login__account {
-                    margin-top: 1rem;
                 }
             }
+        }
+
+        // Aside
+        .login-aside {
+            width: 100% !important;
+        }
+    }
+}
+
+@media (max-width: 1800px) {
+    .login.login-4 {
+        // Aside
+        .login-aside {
+             width: 600px;
         }
     }
 }

@@ -24,14 +24,14 @@ body {
   visibility: hidden;
 }
 
-.spinner {
+.splash-spinner {
   animation: rotate 2s linear infinite;
   margin-left: calc(100vw - 100%);
   width: 50px;
   height: 50px;
 }
 
-.spinner .path {
+.splash-spinner .path {
   stroke: #5d78ff;
   stroke-linecap: round;
   animation: dash 1.5s ease-in-out infinite;

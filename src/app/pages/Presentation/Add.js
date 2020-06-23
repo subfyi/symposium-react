@@ -1,34 +1,11 @@
 import React, {Component} from 'react';
-import {
-    Badge,
-    Card,
-    Input,
-    CardBody,
-    CardHeader,
-    Col,
-    Button,
-    ButtonGroup,
-    ButtonToolbar,
-    Pagination,
-    PaginationItem,
-    PaginationLink,
-    Row,
-
-    Table,
-    InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Label, FormText, CustomInput
-} from 'reactstrap';
-
-import SingleFilePicker, {fix_url} from '../../upload/SingleFilePicker';
-
-import Moment from 'react-moment';
 import GenelForm from '../../common/GenelForm';
 
-import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {Portlet, PortletBody, PortletHeader, PortletHeaderToolbar} from "../../partials/content/Portlet";
+import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import SiparisDetay from './SiparisDetay';
 import AspectRatio from 'react-aspect-ratio';
 import 'react-aspect-ratio/aspect-ratio.css'
+import {CardHeaderToolbar} from "../../../_metronic/_partials/controls";
 
 
 class CustomPanel extends Component {
@@ -39,10 +16,10 @@ class CustomPanel extends Component {
     }
 
     render() {
-        return <Portlet>
-            <PortletHeader
+        return <Card>
+            <CardHeader
                 title={ this.props.title }
-                toolbar={<PortletHeaderToolbar>
+                toolbar={<CardHeaderToolbar>
                     <button
                         type="button"
                         onClick={() => this.setState({
@@ -52,11 +29,11 @@ class CustomPanel extends Component {
                     >
                         <i className="la la-code" />
                     </button>
-                </PortletHeaderToolbar>} />
-            { this.state.on && <PortletBody>
+                </CardHeaderToolbar>} />
+            { this.state.on && <CardBody>
                 { this.props.children }
-            </PortletBody> }
-        </Portlet>;
+            </CardBody> }
+        </Card>;
     }
 }
 

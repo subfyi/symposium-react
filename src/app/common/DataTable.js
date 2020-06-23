@@ -198,8 +198,12 @@ export default class DataTable extends Component {
                 </Col>
                 <Col xs="12" md="2"></Col>
                 <Col xs="12" md="2">
-                    {this.props.add && <Button className="col-md-12 btn btn-primary font-xl d-block mb-12"
-                                               onClick={this.handleExcel.bind(this)}><i className="fa fa-excel"/>
+                    {this.props.add && <Button
+                        color="primary"
+                        block
+                        className="font-xl"
+                        onClick={this.handleExcel.bind(this)}>
+                        <i className="fa fa-file-excel"/>
                         <FormattedMessage id="general.excell"/></Button>}
                 </Col>
                 <Col xs="12" md="4">

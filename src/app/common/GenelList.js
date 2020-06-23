@@ -4,7 +4,6 @@ import {Card, CardBody} from 'reactstrap';
 import DataTable from './DataTable';
 import {tokenized, hatagoster} from '../api';
 import swal2 from 'sweetalert2';
-import '../customcss.css';
 import {FormattedMessage, injectIntl} from 'react-intl';
 import Col from "react-bootstrap/Col";
 

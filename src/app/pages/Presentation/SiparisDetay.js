@@ -1,21 +1,11 @@
 import React, {Component} from 'react';
 import {
-    Badge,
     Card,
-    Input,
     CardBody,
     CardHeader,
-    Col,
     Button,
     ButtonGroup,
-    ButtonToolbar,
-    Pagination,
-    PaginationItem,
-    PaginationLink,
-    Row,
-
     Table,
-    InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Label, FormText, CustomInput
 } from 'reactstrap';
 
 import SingleFilePicker, {fix_url} from '../../upload/SingleFilePicker';
@@ -24,8 +14,6 @@ import Moment from 'react-moment';
 
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {Portlet, PortletBody, PortletHeader} from "../../partials/content/Portlet";
-import { tokenized } from '../../api';
 
 class CustomPanel extends Component {
     state = {on: true};
@@ -53,9 +41,9 @@ export default class SiparisDetay extends Component {
     state = {};
 
     render() {
-        return (  <Portlet>
-            <PortletHeader title="Questions" />
-                <PortletBody>
+        return (  <Card>
+            <CardHeader title="Questions" />
+                <CardBody>
                 <Table striped bordered>
                     <thead>
                     <tr>
@@ -80,7 +68,7 @@ export default class SiparisDetay extends Component {
                                             row.updated_at = null;
                                             this.setState({editingRow: null});
                                             this.props.onSave();
-                                        }}>Guncelle</Button>
+                                        }}>Edit</Button>
                                     </ButtonGroup> : <ButtonGroup>
                                         <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Edit</Button>
                                     </ButtonGroup>}
@@ -106,7 +94,7 @@ export default class SiparisDetay extends Component {
                     }
                     </tbody>
                 </Table>
-                <Button color="primary" onClick={a => {
+                <Button className="col-md-12" color="primary" onClick={a => {
                     if(this.state.editingRow) {
                         this.state.editingRow.updated_at = null;
                         this.setState({editingRow: null});
@@ -121,8 +109,8 @@ export default class SiparisDetay extends Component {
                     this.props.onChange((this.props.value || []).concat([obj]));
                     this.setState({editingRow: obj});
                 }}>{ this.state.editingRow ? 'Save' : 'Add New' }</Button>
-                </PortletBody>
-            </Portlet>
+                </CardBody>
+            </Card>
         );
     }
 }
