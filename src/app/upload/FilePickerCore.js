@@ -85,11 +85,11 @@ export default class FilePickerCore extends Component {
   render() {
     var controller = this.props.controller;
 
-    if(controller.$state === 1) { // dosya sec
+    if(controller.$state === 1 && !this.props.disabled) { // dosya sec
       return <div className={this.props.className}>
         <a href="#" className="btn btn-primary btn-sm" onClick={this.dosyaSec.bind(this)}><i className="fa fa-upload" /> Choose File</a>
       </div>;
-    } else if(controller.$state === 2) { // yukleniyor
+    } else if(controller.$state === 2 && !this.props.disabled) { // yukleniyor
       return <div className={this.props.className}>
         <a href="#" className="btn btn-outline-danger btn-sm" onClick={this.iptalEt.bind(this)}><i className="fa fa-times-circle" /></a>
         &nbsp;<a href="#" onClick={a => a.preventDefault()} className="btn btn-sm btn-outline-dark disabled">
@@ -101,11 +101,16 @@ export default class FilePickerCore extends Component {
     } else if(controller.$state === 3) { // yuklendi
       console.log(controller);
       return <div className={this.props.className}>
-        <a href="#" className="btn btn-outline-danger btn-sm" onClick={this.sil.bind(this)}><i className="fa fa-trash" /></a>
+        {!this.props.disabled && <a href="#" className="btn btn-outline-danger btn-sm" onClick={this.sil.bind(this)}><i className="fa fa-trash" /></a>}
         &nbsp;<a href={"https://api.iseser.com" + controller.$src} target="_blank" className="btn btn-sm btn-outline-primary"><i className="fa fa-download" /> { controller.name }</a>
         <span>&nbsp;({ prettysize(controller.$size) })</span>
       </div>;
     }
+
+    if (this.props.disabled)
+      return <div className={this.props.className}>
+        Disabled
+      </div>;
 
     return <div>Hata olustu</div>;
   }

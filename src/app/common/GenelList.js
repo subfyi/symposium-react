@@ -76,9 +76,9 @@ export default injectIntl(class GenelList extends Component {
                                     {this.props.edit && <a href={this.props.edit(row[this.props.idKey || "id"])}
                                                            className="btn btn-sm btn-outline-primary"><i
                                         className="fa fa-pencil-alt"/> <FormattedMessage id="general.edit"/></a>}
-                                    <a href="#" onClick={this.handleDelete.bind(this, row)}
+                                    { this.props.sil !== false && <a href="#" onClick={this.handleDelete.bind(this, row)}
                                        className="btn btn-outline-danger ml-1 btn-sm"><i className="fa fa-trash"/>
-                                        <FormattedMessage id="general.delete"/></a>
+                                        <FormattedMessage id="general.delete"/></a> }
                                 </td>) || null}
                             </tr>
                         }

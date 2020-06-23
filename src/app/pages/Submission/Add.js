@@ -37,6 +37,9 @@ export default class Add extends Component {
     }
 
     render() {
+        if (!this.state.user)
+            return null;
+
         return (
             <CommonForm
                 key={this.props.match.params.id || 0}
@@ -139,16 +142,11 @@ export default class Add extends Component {
                                 <Label htmlFor="text-input">Abstract (.doc, .docx)</Label>
                             </Col>
                             <Col xs="12" md="9">
-                                <Validator
-                                    name="abstract_dosya"
-                                    value={controller.state.abstract_dosya || controller.state.full_paper_dosya || controller.state.poster_presentation_dosya}
-                                    type="file"
-                                    controller={controller}>
-                                    <SingleFilePicker
-                                        value={controller.state.abstract_dosya}
-                                        onChange={a => controller.setState({abstract_dosya: a})}
-                                    />
-                                </Validator>
+                                <SingleFilePicker
+                                    disabled={!(this.state.user.yetki >= 8)}
+                                    value={controller.state.abstract_dosya}
+                                    onChange={a => controller.setState({abstract_dosya: a})}
+                                />
                             </Col>
                         </FormGroup>
                         <FormGroup row>

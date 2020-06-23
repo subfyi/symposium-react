@@ -2,13 +2,24 @@ import React, {Component} from 'react';
 import {Card, CardBody,  FormGroup} from 'reactstrap';
 import GenelList from '../../common/GenelList';
 import FileDownload from '../../common/FileDownload';
+import { tokenized } from '../../api';
 
 export default class List extends Component {
+    state = {};
+
+    async componentWillMount() {
+        const user = await tokenized.get('/api/myself');
+        this.setState({user: user.data});
+    }
+
     render() {
+        if (!this.state.user)
+            return null;
+
         return <div className="animated fadeIn">
             <Card>
                 <CardBody>
-                    <GenelList url="/api/submission" edit={id => `/submission/${id}/edit`} add="/submission/create">
+                    <GenelList url="/api/submission" edit={id => `/submission/${id}/edit`} sil={this.state.user.yetki >= 8} add={this.state.user.yetki >= 8 && "/submission/create"}>
                         <>
                             <th sort="created_at">Sended Date</th>
                             <th sort="pap_title">Title of Abstract</th>

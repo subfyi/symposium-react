@@ -6,6 +6,18 @@ import { checkIsActive } from "../../../../_helpers";
 import MenuConfig from '../../../../../app/MenuConfig';
 import { FormattedMessage } from "react-intl";
 
+class AutoLink extends React.Component {
+    render() {
+        const { to } = this.props;
+
+        if (to.indexOf("http:") === 0 || to.indexOf("https:") === 0) {
+            return <a href={to} {...this.props} to={null} />
+        }
+
+        return <NavLink {...this.props} to={"/" + to} />;
+    }
+}
+
 export function HeaderMenu({ layoutProps }) {
     const location = useLocation();
     const getMenuItemActive = (url) => {
@@ -43,9 +55,9 @@ export function HeaderMenu({ layoutProps }) {
                                                 { a.submenu.columns.map((b,i) => <li key={i} className="menu-item">
                                                     <ul className="menu-inner">
                                                         { b.items.map((b,i) => <li key={i} className={`menu-item ${getMenuItemActive('/' + b.page)}`}>
-                                                            <NavLink className="menu-link" to={"/" + b.page}>
+                                                            <AutoLink className="menu-link" to={b.page}>
                                                                 <span className="menu-text"><FormattedMessage id={ b.title } /></span>
-                                                            </NavLink>
+                                                            </AutoLink>
                                                         </li>) }
                                                     </ul>
                                                 </li>
@@ -70,9 +82,9 @@ export function HeaderMenu({ layoutProps }) {
                                 <div className="menu-submenu menu-submenu-classic menu-submenu-left">
                                     <ul className="menu-subnav">
                                         { a.submenu.map((b,i) => <li key={i} className={`menu-item ${getMenuItemActive('/' + b.page)}`}>
-                                            <NavLink className="menu-link" to={"/" + b.page}>
+                                            <AutoLink className="menu-link" to={b.page}>
                                                 <span className="menu-text"><FormattedMessage id={ b.title } /></span>
-                                            </NavLink>
+                                            </AutoLink>
                                         </li>)}
                                     </ul>
                                 </div>
@@ -81,11 +93,11 @@ export function HeaderMenu({ layoutProps }) {
 
                         if (a.type === "single") {
                             return <li className={`menu-item menu-item-rel ${getMenuItemActive('/' + a.page)}`}>
-                                <NavLink className="menu-link" to={"/" + a.page}>
+                                <AutoLink className="menu-link" to={a.page}>
                                     <span className="menu-text">
                                             <FormattedMessage id={a.title}/></span>
                                     <i className="menu-arrow"/>
-                                </NavLink>
+                                </AutoLink>
                             </li>;
                         } else return null
                     })
