@@ -4,6 +4,7 @@ import { Link, Redirect, Switch } from "react-router-dom";
 import { ContentRoute } from "../../../../_metronic/layout";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
+import Registration from "./Registration";
 import Login from "./Login";
 
 export function AuthPage() {
@@ -40,7 +41,7 @@ export function AuthPage() {
                     ISESER - Admin Area
                   </h3>
                   <p className="font-weight-lighter text-white opacity-80">
-                    Tarife und News für Smartphones, DSL und Festnetz
+                    International Symposium for Environmental Science and Engineering Research
                   </p>
                 </div>
                 {/* end:: Aside content */}
@@ -55,12 +56,12 @@ export function AuthPage() {
                     <a href="http://www.google.com.tr/search?hl=tr&q=ISESER" target="_blank" rel="noopener noreferrer" className="text-white ml-10">
                       G-Search
                     </a>
-                    <a href="http://www.alexa.com/siteinfo/iseser.com" target="_blank" rel="noopener noreferrer" className="text-white ml-10">
-                      Alexa
+                    <a href="https://iseser.com" target="_blank" rel="noopener noreferrer" className="text-white ml-10">
+                      Home
                     </a>
-                    <Link to="/terms" className="kt-link text-white ml-10">
+                    <a href="https://iseser.com/contact" target="_blank" rel="noopener noreferrer" className="kt-link text-white ml-10">
                       Contact
-                    </Link>
+                    </a>
                   </div>
                 </div>
                 {/* end:: Aside footer for desktop */}
@@ -83,8 +84,8 @@ export function AuthPage() {
                 <Switch>
                 <ContentRoute path="/auth/login" component={Login}/>
 
-{/*
                 <ContentRoute path="/auth/registration" component={Registration}/>
+                  {/*
                 <ContentRoute
                     path="/auth/forgot-password"
                     component={ForgotPassword}

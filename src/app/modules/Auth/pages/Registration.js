@@ -1,283 +1,281 @@
-import { useFormik } from "formik";
+
 import React, { useState } from "react";
 import { FormattedMessage, injectIntl } from "react-intl";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import * as Yup from "yup";
-import { register } from "../_redux/authCrud";
-import * as auth from "../_redux/authRedux";
 
-const initialValues = {
-  fullname: "",
-  email: "",
-  username: "",
-  password: "",
-  changepassword: "",
-  acceptTerms: false,
-};
+import { Input, Row, Label, Col, FormGroup } from "reactstrap";
+import SimpleReactValidator from 'simple-react-validator';
+import {free, hatagoster, log_in, loggedIn} from "../../../api";
+import swal2 from 'sweetalert2';
+import Validator from '../../../common/Validator';
+import ParameterSelect from "../../../common/ParameterSelect";
 
-function Registration(props) {
-  const { intl } = props;
-  const [loading, setLoading] = useState(false);
-  const RegistrationSchema = Yup.object().shape({
-    fullname: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
-    email: Yup.string()
-      .email("Wrong email format")
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
-    username: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
-    password: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      ),
-    changepassword: Yup.string()
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD",
-        })
-      )
-      .when("password", {
-        is: (val) => (val && val.length > 0 ? true : false),
-        then: Yup.string().oneOf(
-          [Yup.ref("password")],
-          "Password and Confirm Password didn't match"
-        ),
-      }),
-    acceptTerms: Yup.bool().required(
-      "You must accept the terms and conditions"
-    ),
-  });
+export default class extends React.Component {
+  state = { };
 
-  const enableLoading = () => {
-    setLoading(true);
-  };
+  constructor(props) {
+    super(props);
 
-  const disableLoading = () => {
-    setLoading(false);
-  };
+    this.validator = new SimpleReactValidator();
+  }
 
-  const getInputClasses = (fieldname) => {
-    if (formik.touched[fieldname] && formik.errors[fieldname]) {
-      return "is-invalid";
+  async handleSubmit(e) {
+    e.preventDefault();
+
+    if(this.loading)
+      return ;
+
+    if (!this.validator.allValid()) {
+      this.validator.showMessages();
+      this.forceUpdate();
+      return ;
     }
 
-    if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-      return "is-valid";
+    var hata;
+
+    this.loading = true;
+    try {
+      hata = await hatagoster(
+          free.post('/api/register', this.state)
+      );
+    } finally {
+      this.loading = false;
     }
 
-    return "";
-  };
+    if(!hata) {
+      await log_in(this.state.email, this.state.password);
+      loggedIn(true);
+      await swal2.fire('Successful', 'Successfully registered.', 'success');
+    }
+  }
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema: RegistrationSchema,
-    onSubmit: (values, { setStatus, setSubmitting }) => {
-      enableLoading();
-      register(values.email, values.fullname, values.username, values.password)
-        .then(({ data: { accessToken } }) => {
-          props.register(accessToken);
-          disableLoading();
-        })
-        .catch(() => {
-          setSubmitting(false);
-          setStatus(
-            intl.formatMessage({
-              id: "AUTH.VALIDATION.INVALID_LOGIN",
-            })
-          );
-          disableLoading();
-        });
-    },
-  });
+  render() {
+    return (
+        <div className="kt-login__body">
+          <div className="">
+            <div className="kt-login__title">
+              <h3>
+                <FormattedMessage id="AUTH.REGISTER.TITLE"/>
+              </h3>
+            </div>
 
-  return (
-    <div className="login-form login-signin" style={{ display: "block" }}>
-      <div className="text-center mb-10 mb-lg-20">
-        <h3 className="font-size-h1">
-          <FormattedMessage id="AUTH.REGISTER.TITLE" />
-        </h3>
-        <p className="text-muted font-weight-bold">
-          Enter your details to create your account
-        </p>
-      </div>
+            <Row>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Name</Label>
+                  <Validator
+                      name="name"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="text"
+                        onChange={a => this.setState({ name: a.currentTarget.value })}
+                        value={this.state.name || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Surname</Label>
+                  <Validator
+                      name="surname"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="text"
+                        onChange={a => this.setState({ surname: a.currentTarget.value })}
+                        value={this.state.surname || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Title</Label>
+                  <Validator
+                      name="title"
+                      type="required"
+                      controller={this}>
+                    <ParameterSelect
+                        free
+                        type="titlecon"
+                        value={this.state.title}
+                        onChange={a => this.setState({title: a})} />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Type</Label>
+                  <Validator
+                      name="type"
+                      type="required"
+                      controller={this}>
+                    <ParameterSelect
+                        free
+                        type="materialcon"
+                        value={this.state.type}
+                        onChange={a => this.setState({type: a})} />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Gender</Label>
+                  <Validator
+                      name="gender"
+                      type="required"
+                      controller={this}>
+                    <ParameterSelect
+                        free
+                        type="gender"
+                        value={this.state.gender}
+                        onChange={a => this.setState({gender: a})} />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Institution</Label>
+                  <Validator
+                      name="institution"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="text"
+                        onChange={a => this.setState({ institution: a.currentTarget.value })}
+                        value={this.state.institution || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Faculty</Label>
+                  <Validator
+                      name="faculty"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="text"
+                        onChange={a => this.setState({ faculty: a.currentTarget.value })}
+                        value={this.state.faculty || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Department</Label>
+                  <Validator
+                      name="department"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="text"
+                        onChange={a => this.setState({ department: a.currentTarget.value })}
+                        value={this.state.department || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Mobile / GSM</Label>
+                  <Input
+                      type="text"
+                      onChange={a => this.setState({ iletisim: a.currentTarget.value })}
+                      value={this.state.iletisim || ""}
+                  />
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Email</Label>
+                  <Validator
+                      name="email"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="email"
+                        onChange={a => this.setState({ email: a.currentTarget.value })}
+                        value={this.state.email || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Password</Label>
+                  <Validator
+                      name="password"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="password"
+                        onChange={a => this.setState({ password: a.currentTarget.value })}
+                        value={this.state.password || ""}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="6">
+                <FormGroup>
+                  <Label>Confirm Password</Label>
+                  <Validator
+                      name="password2"
+                      type="required"
+                      controller={this}>
+                    <Input
+                        type="password"
+                        onChange={a => this.setState({ password2: a.currentTarget.value })}
+                        value={this.state.password2}
+                    />
+                  </Validator>
+                </FormGroup>
+              </Col>
+              <Col md="12">
+                <FormGroup>
+                  <Label>Address</Label>
+                  <Input
+                      type="textarea"
+                      rows="4"
+                      onChange={a => this.setState({ address: a.currentTarget.value })}
+                      value={this.state.address}
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
 
-      <form
-        id="kt_login_signin_form"
-        className="form fv-plugins-bootstrap fv-plugins-framework animated animate__animated animate__backInUp"
-        onSubmit={formik.handleSubmit}
-      >
-        {/* begin: Alert */}
-        {formik.status && (
-          <div className="mb-10 alert alert-custom alert-light-danger alert-dismissible">
-            <div className="alert-text font-weight-bold">{formik.status}</div>
+            <Row>
+              <Col md="4">
+                <Link
+                    to="/auth/forgot-password"
+                    className="kt-link kt-login__link-forgot col-md-4"
+                >
+                  <FormattedMessage id="AUTH.GENERAL.FORGOT_BUTTON"/>
+                </Link>
+              </Col>
+              <Col md="4">
+                <Link to="/auth/login">
+                  <a className="btn btn-secondary btn-elevate kt-login__btn-secondary btn-block">
+                    Back
+                  </a>
+                </Link>
+              </Col>
+              <Col md="4">
+                <button
+                    disabled={!!this.loading}
+                    onClick={this.handleSubmit.bind(this)}
+                    className="btn btn-primary btn-elevate kt-login__btn-primary btn-block"
+                >
+                  { !this.loading ? 'Submit' : 'Please wait..' }
+                </button>
+              </Col>
+            </Row>
           </div>
-        )}
-        {/* end: Alert */}
-
-        {/* begin: Fullname */}
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Full name"
-            type="text"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "fullname"
-            )}`}
-            name="fullname"
-            {...formik.getFieldProps("fullname")}
-          />
-          {formik.touched.fullname && formik.errors.fullname ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.fullname}</div>
-            </div>
-          ) : null}
         </div>
-        {/* end: Fullname */}
-
-        {/* begin: Email */}
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Email"
-            type="email"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "email"
-            )}`}
-            name="email"
-            {...formik.getFieldProps("email")}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.email}</div>
-            </div>
-          ) : null}
-        </div>
-        {/* end: Email */}
-
-        {/* begin: Username */}
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="User name"
-            type="text"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "username"
-            )}`}
-            name="username"
-            {...formik.getFieldProps("username")}
-          />
-          {formik.touched.username && formik.errors.username ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.username}</div>
-            </div>
-          ) : null}
-        </div>
-        {/* end: Username */}
-
-        {/* begin: Password */}
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Password"
-            type="password"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "password"
-            )}`}
-            name="password"
-            {...formik.getFieldProps("password")}
-          />
-          {formik.touched.password && formik.errors.password ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.password}</div>
-            </div>
-          ) : null}
-        </div>
-        {/* end: Password */}
-
-        {/* begin: Confirm Password */}
-        <div className="form-group fv-plugins-icon-container">
-          <input
-            placeholder="Confirm Password"
-            type="password"
-            className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "changepassword"
-            )}`}
-            name="changepassword"
-            {...formik.getFieldProps("changepassword")}
-          />
-          {formik.touched.changepassword && formik.errors.changepassword ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">
-                {formik.errors.changepassword}
-              </div>
-            </div>
-          ) : null}
-        </div>
-        {/* end: Confirm Password */}
-
-        {/* begin: Terms and Conditions */}
-        <div className="form-group">
-          <label className="checkbox">
-            <input
-              type="checkbox"
-              name="acceptTerms"
-              {...formik.getFieldProps("acceptTerms")}
-            />
-            I agree the{" "}
-            <Link to="/terms" target="_blank" rel="noopener noreferrer">
-              Terms & Conditions
-            </Link>
-            .
-            <span />
-          </label>
-          {formik.touched.acceptTerms && formik.errors.acceptTerms ? (
-            <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.acceptTerms}</div>
-            </div>
-          ) : null}
-        </div>
-        {/* end: Terms and Conditions */}
-        <div className="form-group d-flex flex-wrap flex-center">
-          <button
-            type="submit"
-            disabled={formik.isSubmitting || !formik.values.acceptTerms}
-            className="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4"
-          >
-            <span>Submit</span>
-            {loading && <span className="ml-3 spinner spinner-white"></span>}
-          </button>
-
-          <Link to="/auth/login">
-            <button
-              type="button"
-              className="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-4"
-            >
-              Cancel
-            </button>
-          </Link>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-export default injectIntl(connect(null, auth.actions)(Registration));
+    );
+  }
+};

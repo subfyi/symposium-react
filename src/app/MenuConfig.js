@@ -10,14 +10,6 @@ export default {
                 type: "single",
             },
             {
-                title: "Paper Submission",
-                root: true,
-                alignment: "left",
-                page: "submission/create",
-                bullet: "dot",
-                type: "single",
-            },
-            {
                 title: "Sended Papers",
                 root: true,
                 alignment: "left",
