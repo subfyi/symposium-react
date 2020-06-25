@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
 import GenelForm from '../../common/GenelForm';
-
-import {Card, CardBody, CardHeader, Col, Row} from 'reactstrap';
 import SiparisDetay from './SiparisDetay';
 import AspectRatio from 'react-aspect-ratio';
 import 'react-aspect-ratio/aspect-ratio.css'
-import {CardHeaderToolbar} from "../../../_metronic/_partials/controls";
 
+import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
 
 class CustomPanel extends Component {
     state = { on: false };
@@ -50,7 +48,7 @@ export default class AddPresentation extends Component {
             >
                 {
                     controller => controller.state && controller.state.video && <>
-                        <CustomPanel open title="Video">
+                        <CustomPanel open title={"Presentation Title: " + controller.state.pap_title}>
                             <AspectRatio ratio="16/9" style={{ width: '100%' }}>
                                 <iframe style={{ width: '100%' }} frameBorder="0" src={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} allowFullScreen />
                             </AspectRatio>

@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {Card, CardBody} from 'reactstrap';
+import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
 import GenelList from '../../common/GenelList';
 import { Link } from 'react-router-dom';
-
-import FileDownload from '../../common/FileDownload';
  
 export default class List extends Component {
     render() {

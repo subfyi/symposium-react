@@ -1,17 +1,11 @@
 import React, {Component} from 'react';
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    Button,
-    ButtonGroup,
-    Table,
-} from 'reactstrap';
+import { Button,  ButtonGroup, Table } from 'reactstrap';
 
-import SingleFilePicker, {fix_url} from '../../upload/SingleFilePicker';
+import SingleFilePicker from '../../upload/SingleFilePicker';
 
 import Moment from 'react-moment';
 
+import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
