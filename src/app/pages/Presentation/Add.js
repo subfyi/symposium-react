@@ -5,6 +5,8 @@ import AspectRatio from 'react-aspect-ratio';
 import 'react-aspect-ratio/aspect-ratio.css'
 
 import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
+import GenelList from "../../common/GenelList";
+import {Link} from "react-router-dom";
 
 class CustomPanel extends Component {
     state = { on: false };
@@ -24,8 +26,7 @@ class CustomPanel extends Component {
                             on: !this.state.on
                         })}
                         className="btn btn-clean btn-sm btn-icon btn-icon-md ng-star-inserted"
-                    >
-                        <i className="la la-code" />
+                    ><i className="fas fa-expand-arrows-alt" />
                     </button>
                 </CardHeaderToolbar>} />
             { this.state.on && <CardBody>
@@ -48,12 +49,34 @@ export default class AddPresentation extends Component {
             >
                 {
                     controller => controller.state && controller.state.video && <>
-                        <CustomPanel open title={"Presentation Title: " + controller.state.pap_title}>
+                        <CustomPanel open title={"Topic: " + (controller.state.topic && controller.state.topic.value)}>
                             <AspectRatio ratio="16/9" style={{ width: '100%' }}>
                                 <iframe style={{ width: '100%' }} frameBorder="0" src={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} allowFullScreen />
                             </AspectRatio>
                         </CustomPanel>
-                        
+                        <Card><CardHeader
+                            title={"Title: " + controller.state.pap_title} />
+                            <CardBody>
+                                <p>
+                                    {controller.state.authors.map((author, index) =>
+                                        <>{author.name} {author.surname}{" "}
+                                            {!!author.correspond && <span>(Correspond)</span>}
+                                            {!!author.presenter && <span>(Presenter)</span>}.{" "}
+                                        </>
+                                    )}
+
+                                </p>
+                                <hr />
+                                <p>
+                                    <b>Abstract</b>: {controller.state.pap_abstract}
+                                </p>
+                                <hr />
+                                <p>
+                                    <b>Keyword</b>: {(controller.state.pap_keyword || "").split('|').toString()}
+                                </p>
+                            </CardBody>
+                        </Card>
+
                         <SiparisDetay
                             value={controller.state.icerikler}
                             onChange={val => controller.setState({icerikler: val})}

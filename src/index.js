@@ -23,6 +23,11 @@ import {
 } from "./_metronic/layout";
 import {MetronicI18nProvider} from "./_metronic/i18n";
 
+import moment from 'moment';
+import reactMoment from 'react-moment';
+
+let enLocale = require('moment/locale/en-in');
+moment.locale('en',enLocale);
 /**
  * Base URL of the website.
  *

@@ -34,7 +34,7 @@ export default function BasePage() {
         <Suspense fallback={<LayoutSplashScreen/>}>
             <Switch>
                 {
-                    <Redirect exact from="/" to="/submissions"/>
+                    <Redirect exact from="/" to="/presentation"/>
                 }
 
                 <Route path="/profile" component={ProfileEdit}/>

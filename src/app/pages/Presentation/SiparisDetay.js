@@ -36,7 +36,7 @@ export default class SiparisDetay extends Component {
 
     render() {
         return (  <Card>
-            <CardHeader title="Questions" />
+            <CardHeader title="Questions & Answers" />
                 <CardBody>
                 <Table striped bordered>
                     <thead>
