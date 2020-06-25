@@ -47,11 +47,11 @@ export default class SiparisDetay extends Component {
                 <Table striped bordered>
                     <thead>
                     <tr>
-                        <th style={{ width: '30%' }}>Sahibi</th>
-                        <th style={{ width: '20%' }}>Oluşturma</th>
-                        <th style={{ width: '20%' }}>Güncelleme</th>
-                        <th style={{ width: '20%' }}>Geçen</th>
-                        <th style={{ width: '10%' }}>İşlem</th>
+                        <th style={{ width: '30%' }}>Creator</th>
+                        <th style={{ width: '20%' }}>Created At</th>
+                        <th style={{ width: '20%' }}>Updated At</th>
+                        <th style={{ width: '20%' }}>Past Time</th>
+                        <th style={{ width: '10%' }}>Operation</th>
                     </tr>
                     </thead>
                     <tbody>
