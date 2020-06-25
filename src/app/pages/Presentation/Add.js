@@ -5,8 +5,6 @@ import AspectRatio from 'react-aspect-ratio';
 import 'react-aspect-ratio/aspect-ratio.css'
 
 import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
-import GenelList from "../../common/GenelList";
-import {Link} from "react-router-dom";
 
 class CustomPanel extends Component {
     state = { on: false };
