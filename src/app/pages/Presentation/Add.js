@@ -41,7 +41,7 @@ export default class AddPresentation extends Component {
                 noCard
                 noSave
                 key={this.props.match.params.id || 0}
-                url="/api/submission"
+                url="/api/submission?presentation=1"
                 id={this.props.match.params.id}
                 {...this.props}
             >
