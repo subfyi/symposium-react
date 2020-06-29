@@ -44,7 +44,7 @@ export function HeaderMenu({ layoutProps }) {
                                     className={`menu-item menu-item-submenu menu-item-rel`}>
                                     <NavLink className="menu-link menu-toggle" to="/">
                                         <span className="menu-text">
-                                            <FormattedMessage id={ a.title } />
+                                            { a.title }
                                         </span>
                                         <i className="menu-arrow" />
                                     </NavLink>
@@ -56,7 +56,7 @@ export function HeaderMenu({ layoutProps }) {
                                                     <ul className="menu-inner">
                                                         { b.items.map((b,i) => <li key={i} className={`menu-item ${getMenuItemActive('/' + b.page)}`}>
                                                             <AutoLink className="menu-link" to={b.page}>
-                                                                <span className="menu-text"><FormattedMessage id={ b.title } /></span>
+                                                                <span className="menu-text">{ b.title }</span>
                                                             </AutoLink>
                                                         </li>) }
                                                     </ul>
@@ -75,7 +75,7 @@ export function HeaderMenu({ layoutProps }) {
                                 className={`menu-item menu-item-submenu menu-item-rel`}>
                                 <NavLink className="menu-link menu-toggle" to="/">
                                     <span className="menu-text">
-                                        <FormattedMessage id={ a.title } />
+                                       { a.title }
                                     </span>
                                     <i className="menu-arrow" />
                                 </NavLink>
@@ -83,7 +83,7 @@ export function HeaderMenu({ layoutProps }) {
                                     <ul className="menu-subnav">
                                         { a.submenu.map((b,i) => <li key={i} className={`menu-item ${getMenuItemActive('/' + b.page)}`}>
                                             <AutoLink className="menu-link" to={b.page}>
-                                                <span className="menu-text"><FormattedMessage id={ b.title } /></span>
+                                                <span className="menu-text">{ b.title }</span>
                                             </AutoLink>
                                         </li>)}
                                     </ul>
@@ -95,7 +95,7 @@ export function HeaderMenu({ layoutProps }) {
                             return <li className={`menu-item menu-item-rel ${getMenuItemActive('/' + a.page)}`}>
                                 <AutoLink className="menu-link" to={a.page}>
                                     <span className="menu-text">
-                                            <FormattedMessage id={a.title}/></span>
+                                           {a.title}</span>
                                     <i className="menu-arrow"/>
                                 </AutoLink>
                             </li>;
