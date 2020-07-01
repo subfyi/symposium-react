@@ -39,7 +39,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="nav-link pr-3 pl-0"
           >
-            G-Arama
+            G-Search
           </a>
           <a
             href="http://www.alexa.com/siteinfo/iseser.com"

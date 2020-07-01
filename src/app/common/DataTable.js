@@ -207,7 +207,7 @@ export default class DataTable extends Component {
                         <FormattedMessage id="general.excell"/></Button>}
                 </Col>
                 <Col xs="12" md="4">
-                    <Input placeholder="Arama..." type="text" value={this.state.params.query}
+                    <Input placeholder="Search..." type="text" value={this.state.params.query}
                            onChange={e => this.updateAndReload({query: e.currentTarget.value, page: 1}, e)}/>
                 </Col>
             </FormGroup>

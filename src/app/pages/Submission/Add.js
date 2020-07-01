@@ -174,6 +174,7 @@ export default class Add extends Component {
                             <Col xs="12" md="9">
                                 <GDriveSingleFilePicker
                                     disabled={!(this.state.user.yetki >= 8)}
+                                    accepts="video/mp4"
                                     value={controller.state.video}
                                     onChange={a => controller.setState({video: a})}
                                 />
