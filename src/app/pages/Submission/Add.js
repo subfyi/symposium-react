@@ -115,6 +115,7 @@ export default class Add extends Component {
                                     <ParameterSelect
                                         type="uygulamacon"
                                         value={controller.state.pre_type}
+                                        disabled={!!controller.state.paper_approved && !(this.state.user && this.state.user.yetki >= 8)}
                                         onChange={a => controller.setState({pre_type: a})}/>
                                 </Validator>
                             </Col>

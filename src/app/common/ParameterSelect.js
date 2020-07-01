@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Badge, Card, FormGroup, Input, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
-
 import { free, tokenized } from '../api';
 import  axios from 'axios';
-
 import AsyncSelect from 'react-select/async';
 
 export default class ParameterSelect extends Component {
@@ -63,6 +60,6 @@ export default class ParameterSelect extends Component {
   }
 
   render() {
-    return <AsyncSelect value={this.state.selected} onChange={this.handleChange.bind(this)} cacheOptions defaultOptions isClearable={true} loadOptions={this.loadData.bind(this)} />;
+    return <AsyncSelect  isDisabled={this.props.disabled} value={this.state.selected} onChange={this.handleChange.bind(this)} cacheOptions defaultOptions isClearable={true} loadOptions={this.loadData.bind(this)} />;
   }
 }
