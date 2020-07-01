@@ -68,9 +68,9 @@ export default injectIntl(class GenelList extends Component {
                         </thead>
                         <tbody>
                         {
-                            row => <tr key={row.id} className={this.props.trstyle && this.props.trstyle(row)}>
+                            (row, index) => <tr key={row.id} className={this.props.trstyle && this.props.trstyle(row)}>
 
-                                {this.props.children[1](row)}
+                                {this.props.children[1](row, index)}
                                 {(this.props.islem !== false && <td className="thstyle">
                                     {this.props.edit && <a href={this.props.edit(row[this.props.idKey || "id"])}
                                                            className="btn btn-sm btn-outline-primary"><i

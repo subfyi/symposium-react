@@ -30,8 +30,8 @@ export default class List extends Component {
                             <th></th>
                         </>
                         {
-                            row => row.i == 1 ? null : <>
-                                <td>#</td>
+                            (row, index) => row.id == 1 ? null : <>
+                                <td>P{index+1}</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
                                 <td>{row.parampre && row.parampre.value}</td>
