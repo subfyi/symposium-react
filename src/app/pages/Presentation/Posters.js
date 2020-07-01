@@ -30,7 +30,7 @@ export default class List extends Component {
                             <th></th>
                         </>
                         {
-                            row => <>
+                            row => row.i == 1 ? null : <>
                                 <td>#</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
