@@ -193,7 +193,7 @@ export default class DataTable extends Component {
                         <option value="50">50</option>
                         <option value="150">150</option>
                         <option value="200">200</option>
-                        <option value="-1"><FormattedMessage id="general.all"/></option>
+                        <option value="-1">All</option>
                     </Input>
                 </Col>
                 <Col xs="12" md="2"></Col>

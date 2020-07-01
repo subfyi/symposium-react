@@ -8,6 +8,7 @@ import Moment from 'react-moment';
 import { Card, CardBody, CardHeader  } from '../../../_metronic/_partials/controls';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {tokenized} from "../../api";
 
 class CustomPanel extends Component {
     state = {on: true};
@@ -34,7 +35,18 @@ class CustomPanel extends Component {
 export default class SiparisDetay extends Component {
     state = {};
 
+
+    async componentWillMount() {
+        const user = await tokenized.get('/api/myself');
+        this.setState({user: user.data});
+    }
+
+
     render() {
+        if (!this.state.user)
+            return null;
+
+
         return (  <Card>
             <CardHeader title="Questions & Answers" />
                 <CardBody>
@@ -64,7 +76,7 @@ export default class SiparisDetay extends Component {
                                             this.props.onSave();
                                         }}>Edit</Button>
                                     </ButtonGroup> : <ButtonGroup>
-                                        <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Edit</Button>
+                                        { (row.user.id == this.state.user.id || this.state.user.yetki >= 8) && <Button color="warning" size="sm"  onClick={a => this.setState({editingRow: row})}>Edit</Button>}
                                     </ButtonGroup>}
                                 </td>
                             </tr>
