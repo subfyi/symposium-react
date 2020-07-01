@@ -5,6 +5,7 @@ import AspectRatio from 'react-aspect-ratio';
 import 'react-aspect-ratio/aspect-ratio.css'
 
 import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
+import SingleFilePicker from "../../upload/SingleFilePicker";
 
 class CustomPanel extends Component {
     state = { on: false };
@@ -52,6 +53,7 @@ export default class AddPresentation extends Component {
                                 <iframe style={{ width: '100%' }} frameBorder="0" src={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} allowFullScreen />
                             </AspectRatio>
                         </CustomPanel>
+
                         <Card><CardHeader
                             title={"Title: " + controller.state.pap_title} />
                             <CardBody>

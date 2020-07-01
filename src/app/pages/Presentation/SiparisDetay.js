@@ -5,7 +5,7 @@ import SingleFilePicker from '../../upload/SingleFilePicker';
 
 import Moment from 'react-moment';
 
-import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
+import { Card, CardBody, CardHeader  } from '../../../_metronic/_partials/controls';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -52,7 +52,7 @@ export default class SiparisDetay extends Component {
                     {
                         (this.props.value || []).map(row => <>
                             <tr>
-                                <td>{(row.user && row.user.name) || 'You'}</td>
+                                <td>{(row.user && row.user.name + " " +row.user.surname) || 'You'}</td>
                                 <td>{row.created_at || "Now"}</td>
                                 <td>{row.updated_at || "Now"}</td>
                                 <td><Moment fromNow ago>{row.created_at}</Moment></td>
@@ -69,7 +69,7 @@ export default class SiparisDetay extends Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="5">
+                                <td colSpan="5">
                                     {(row.dosyalar || []).map(dosya => <div className="mt-1 mb-1"><SingleFilePicker value={dosya.dosya} disabled noThumb /></div>)}
 
                                     {this.state.editingRow === row ? <>

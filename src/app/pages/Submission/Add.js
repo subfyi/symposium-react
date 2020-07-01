@@ -1,30 +1,12 @@
 import React, {Component} from 'react';
-import {
-    Badge,
-    Card,
-    Input,
-    CustomInput,
-    Button,
-    CardBody,
-    CardHeader,
-    Col,
-    Pagination,
-    PaginationItem,
-    PaginationLink,
-    Row,
-    Table,
-    InputGroup, InputGroupAddon, InputGroupText, Form, FormGroup, Label
-} from 'reactstrap';
+import { Input,     CustomInput,  Button,     Col, FormGroup, Label } from 'reactstrap';
 
 import CommonForm from '../../common/GenelForm';
-import KurumSelect from '../../common/KurumSelect';
 import Validator from '../../common/Validator';
 import AuthorSelect from '../../common/AuthorSelect';
-
 import MultiParameterSelect from '../../common/MultiParameterSelect';
 import ParameterSelect from '../../common/ParameterSelect';
 import SingleFilePicker from '../../upload/SingleFilePicker';
-import {controllers} from 'chart.js';
 import {tokenized} from '../../api';
 import GDriveSingleFilePicker from '../../upload/GDriveSingleFilePicker';
 
@@ -178,6 +160,7 @@ export default class Add extends Component {
                                     type="file"
                                     controller={controller}>
                                     <SingleFilePicker
+                                        disabled={!(this.state.user.yetki >= 8)}
                                         value={controller.state.poster_presentation_dosya}
                                         onChange={a => controller.setState({poster_presentation_dosya: a})}
                                     />
@@ -190,7 +173,7 @@ export default class Add extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <GDriveSingleFilePicker
-                                    accepts="video/mp4"
+                                    disabled={!(this.state.user.yetki >= 8)}
                                     value={controller.state.video}
                                     onChange={a => controller.setState({video: a})}
                                 />

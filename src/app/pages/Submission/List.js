@@ -21,6 +21,7 @@ export default class List extends Component {
                 <CardBody>
                     <GenelList url="/api/submission" edit={id => `/submission/${id}/edit`} sil={this.state.user.yetki >= 8} add={this.state.user.yetki >= 8 && "/submission/create"}>
                         <>
+                            <td>#</td>
                             <th sort="created_at">Sended Date</th>
                             <th sort="pap_title">Title of Abstract</th>
                             <th sort="topic.value">Topic of Article</th>
@@ -33,6 +34,7 @@ export default class List extends Component {
                         </>
                         {
                             row => <>
+                                <td>{row.id}</td>
                                 <td>{row.created_at}</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>

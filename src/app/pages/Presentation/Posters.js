@@ -1,15 +1,28 @@
 import React, {Component} from 'react';
-import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
+import { Card, CardBody } from '../../../_metronic/_partials/controls';
 import GenelList from '../../common/GenelList';
 import { Link } from 'react-router-dom';
+import Table from "@material-ui/core/Table";
  
 export default class List extends Component {
     render() {
         return <div className="animated fadeIn">
             <Card>
                 <CardBody>
-                    <GenelList islem={false} url="/api/submission?presentation=1">
+                    <Table hover bordered striped responsive size="m">
+                        <thead>
+                        <tr>
+                            <th><Link to={"/presentation/1/watch"} className="btn btn-sm btn-primary col-md-12"><i className="fas fa-eye"/> Opening speech</Link></th>
+                        </tr>
+                        </thead>
+                    </Table>
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <GenelList islem={false} url="/api/submission?page=1&itemPerPage=-1&query=&sort=id&desc=false&posters=1&year=2020">
                         <>
+                            <td>#</td>
                             <th sort="pap_title">Title of Abstract</th>
                             <th sort="topic.value">Topic of Article</th>
                             <th sort="parampre.value">Pre. Type</th>
@@ -18,6 +31,7 @@ export default class List extends Component {
                         </>
                         {
                             row => <>
+                                <td>#</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
                                 <td>{row.parampre && row.parampre.value}</td>

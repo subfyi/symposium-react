@@ -62,7 +62,6 @@ export default injectIntl(class GenelList extends Component {
                                url={this.props.url} ref={this.dataTable} defaultParams={this.props.defaultParams}>
                         <thead>
                         <tr>
-                            <th sort="id">#</th>
                             {this.props.children[0]}
                             {(this.props.islem !== false && <th><FormattedMessage id="general.operations"/></th>) || null}
                         </tr>
@@ -70,7 +69,7 @@ export default injectIntl(class GenelList extends Component {
                         <tbody>
                         {
                             row => <tr key={row.id} className={this.props.trstyle && this.props.trstyle(row)}>
-                                <td>{row.id}</td>
+
                                 {this.props.children[1](row)}
                                 {(this.props.islem !== false && <td className="thstyle">
                                     {this.props.edit && <a href={this.props.edit(row[this.props.idKey || "id"])}
