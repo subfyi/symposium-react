@@ -20,7 +20,7 @@ export default class List extends Component {
             </Card>
             <Card>
                 <CardBody>
-                    <GenelList islem={false} url="/api/submission?page=1&itemPerPage=-1&query=&sort=id&desc=false&posters=1&year=2020">
+                    <GenelList islem={false} url="/api/submission?page=1&itemPerPage=-1&query=&sort=id&desc=false&posters=1&year=2020&presentation=1">
                         <>
                             <td>#</td>
                             <th sort="pap_title">Title of Abstract</th>
