@@ -22,7 +22,7 @@ export default class DataTable extends Component {
         super(props);
 
         this.state = {
-            params: {page: 1, itemPerPage: 50, query: "", sort: "id", desc: true, ...(this.props.defaultParams || {})}
+            params: {page: 1, itemPerPage: 50, query: "", sort: "id", desc: false, ...(this.props.defaultParams || {})}
         };
     }
 
