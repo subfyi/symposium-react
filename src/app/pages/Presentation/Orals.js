@@ -35,7 +35,7 @@ export default class Orals extends Component {
                         </>
                         {
                             (row, index) => <>
-                                <td>O{index+1}</td>
+                                <td>#</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
                                 <td>{row.parampre && row.parampre.value}</td>

@@ -31,7 +31,7 @@ export default class List extends Component {
                         </>
                         {
                             (row, index) => <>
-                                <td>P{index+1}</td>
+                                <td>#</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
                                 <td>{row.parampre && row.parampre.value}</td>
