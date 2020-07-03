@@ -22,7 +22,7 @@ export default class DataTable extends Component {
         super(props);
 
         this.state = {
-            params: {page: 1, itemPerPage: 25, query: "", sort: "id", desc: true, ...(this.props.defaultParams || {})}
+            params: {page: 1, itemPerPage: 50, query: "", sort: "id", desc: true, ...(this.props.defaultParams || {})}
         };
     }
 
@@ -101,7 +101,7 @@ export default class DataTable extends Component {
         e.preventDefault();
 
         var workbook = new Excel.Workbook();
-        workbook.creator = 'Narusta';
+        workbook.creator = 'Iseser';
         workbook.created = new Date();
         workbook.modified = new Date();
 
@@ -189,8 +189,8 @@ export default class DataTable extends Component {
                 <Col md="2">
                     <Input type="select" value={this.state.params.itemPerPage.toString()}
                            onChange={a => this.updateAndReload2({itemPerPage: +a.currentTarget.value})}>
-                        <option value="25">25</option>
                         <option value="50">50</option>
+                        <option value="100">100</option>
                         <option value="150">150</option>
                         <option value="200">200</option>
                         <option value="-1">All</option>
