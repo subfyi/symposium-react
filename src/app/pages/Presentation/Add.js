@@ -2,22 +2,21 @@ import React, {Component} from 'react';
 import GenelForm from '../../common/GenelForm';
 import SiparisDetay from './SiparisDetay';
 import AspectRatio from 'react-aspect-ratio';
-import 'react-aspect-ratio/aspect-ratio.css'
+import 'react-aspect-ratio/aspect-ratio.css';
+import {Card, CardBody, CardHeader, CardHeaderToolbar} from '../../../_metronic/_partials/controls';
 
-import { Card, CardBody, CardHeader, CardHeaderToolbar } from '../../../_metronic/_partials/controls';
-import SingleFilePicker from "../../upload/SingleFilePicker";
 
 class CustomPanel extends Component {
-    state = { on: false };
+    state = {on: false};
 
     componentWillMount() {
-        this.setState({ on: !!this.props.open });
+        this.setState({on: !!this.props.open});
     }
 
     render() {
         return <Card>
             <CardHeader
-                title={ this.props.title }
+                title={this.props.title}
                 toolbar={<CardHeaderToolbar>
                     <button
                         type="button"
@@ -25,12 +24,12 @@ class CustomPanel extends Component {
                             on: !this.state.on
                         })}
                         className="btn btn-clean btn-sm btn-icon btn-icon-md ng-star-inserted"
-                    ><i className="fas fa-expand-arrows-alt" />
+                    ><i className="fas fa-expand-arrows-alt"/>
                     </button>
-                </CardHeaderToolbar>} />
-            { this.state.on && <CardBody>
-                { this.props.children }
-            </CardBody> }
+                </CardHeaderToolbar>}/>
+            {this.state.on && <CardBody>
+                {this.props.children}
+            </CardBody>}
         </Card>;
     }
 }
@@ -49,30 +48,30 @@ export default class AddPresentation extends Component {
                 {
                     controller => controller.state && controller.state.video && <>
                         <CustomPanel open title={"Topic: " + (controller.state.topic && controller.state.topic.value)}>
-                            <AspectRatio ratio="16/9" style={{ width: '100%' }}>
-                                <iframe style={{ width: '100%' }} frameBorder="0" src={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} allowFullScreen />
+                            <AspectRatio ratio="16/9" style={{width: '100%'}}>
+                                <iframe style={{width: '100%'}} frameBorder="0" src={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} allowFullScreen/>
                             </AspectRatio>
                         </CustomPanel>
 
                         <Card><CardHeader
-                            title={"Title: " + controller.state.pap_title} />
+                            title={"Title: " + controller.state.pap_title}/>
                             <CardBody>
                                 <p>
                                     {controller.state.authors.map((author, index) =>
                                         <>{author.name} {author.surname}{" "}
                                             {!!author.correspond && <span>(Correspond)</span>}
-                                            {!!author.presenter && <span>(Presenter)</span>}.{" "}
+                                            {!!author.presenter && <span>(Presenter)</span>},
                                         </>
                                     )}
 
                                 </p>
-                                <hr />
+                                <hr/>
                                 <p>
                                     <b>Abstract</b>: {controller.state.pap_abstract}
                                 </p>
-                                <hr />
+                                <hr/>
                                 <p>
-                                    <b>Keyword</b>: {(controller.state.pap_keyword || "").split('|').toString()}
+                                    <b>Keyword</b>: {(controller.state.pap_keyword || " ").split('|').toString()}
                                 </p>
                             </CardBody>
                         </Card>

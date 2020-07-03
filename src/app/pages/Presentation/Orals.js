@@ -3,7 +3,6 @@ import {Card, CardBody} from '../../../_metronic/_partials/controls';
 import GenelList from '../../common/GenelList';
 import {Link} from 'react-router-dom';
 import Table from "@material-ui/core/Table";
-import {FormGroup} from "reactstrap";
 
 export default class Orals extends Component {
     render() {
@@ -34,7 +33,7 @@ export default class Orals extends Component {
                             <th></th>
                         </>
                         {
-                            (row, index) => <>
+                            (row) => <>
                                 <td>#</td>
                                 <td>{row.pap_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
