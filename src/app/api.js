@@ -108,7 +108,7 @@ function renew_token() {
 
     access_token = data.data.access_token;
 
-    localStorage.setItem('tt_access_token', access_token);
+    localStorage.setItem('symposium_access_token', access_token);
   }
 }
 
