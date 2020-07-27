@@ -143,6 +143,7 @@ export default class Add extends Component {
                                     type="file"
                                     controller={controller}>
                                     <SingleFilePicker
+                                        disabled={!(this.state.user.yetki >= 8)}
                                         value={controller.state.full_paper_dosya}
                                         onChange={a => controller.setState({full_paper_dosya: a})}
                                     />
