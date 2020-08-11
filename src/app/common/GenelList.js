@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import {Card, CardBody} from 'reactstrap';
-
-import DataTable from './DataTable';
-import {tokenized, hatagoster} from '../api';
-import swal2 from 'sweetalert2';
-import {FormattedMessage, injectIntl} from 'react-intl';
+import React, { Component } from 'react';
 import Col from "react-bootstrap/Col";
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { Card, CardBody } from 'reactstrap';
+import swal2 from 'sweetalert2';
+import { hatagoster, tokenized } from '../api';
+import DataTable from './DataTable';
+
 
 export default injectIntl(class GenelList extends Component {
     constructor(props) {
@@ -31,10 +31,10 @@ export default injectIntl(class GenelList extends Component {
             return;
         }
 
-        var hata = await hatagoster(tokenized.delete(`${this.props.url}/${parameter.id}`));
+        var hata = await hatagoster(tokenized.delete(`${this.props.url}/${parameter[this.props.idKey || "id"]}`));
 
         if (!hata) {
-            this.dataTable.current.updateAndReload({}, e);
+            this.dataTable.current && this.dataTable.current.updateAndReload({}, e);
             await swal2.fire(
                 this.props.intl.formatMessage({id: 'general.success'}),
                 this.props.intl.formatMessage({id: 'general.delete_success'}),
@@ -59,25 +59,27 @@ export default injectIntl(class GenelList extends Component {
             <Card>
                 <CardBody>
                     <DataTable updateInterval={this.props.updateInterval} name={this.props.name} add={this.props.add}
-                               url={this.props.url} ref={this.dataTable} defaultParams={this.props.defaultParams}>
+                               url={this.props.url} ref={this.dataTable} defaultParams={this.props.defaultParams} intl={this.props.intl}>
                         <thead>
                         <tr>
+                            <th sort="id">#</th>
                             {this.props.children[0]}
                             {(this.props.islem !== false && <th><FormattedMessage id="general.operations"/></th>) || null}
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            (row, index) => <tr key={row.id} className={this.props.trstyle && this.props.trstyle(row)}>
-
-                                {this.props.children[1](row, index)}
+                            row => <tr key={row[this.props.idKey || "id"]} className={this.props.trstyle && this.props.trstyle(row)}>
+                                <td>{row[this.props.idKey || "id"]}</td>
+                                {this.props.children[1](row)}
                                 {(this.props.islem !== false && <td className="thstyle">
                                     {this.props.edit && <a href={this.props.edit(row[this.props.idKey || "id"])}
+                                                           onClick={this.handleEdit.bind(this, row)}
                                                            className="btn btn-sm btn-outline-primary"><i
-                                        className="fa fa-pencil-alt"/> <FormattedMessage id="general.edit"/></a>}
-                                    { this.props.sil !== false && <a href="#" onClick={this.handleDelete.bind(this, row)}
+                                        className="fa fa-pencil-alt"/></a>}
+                                    <a href="#" onClick={this.handleDelete.bind(this, row)}
                                        className="btn btn-outline-danger ml-1 btn-sm"><i className="fa fa-trash"/>
-                                        <FormattedMessage id="general.delete"/></a> }
+                                    </a>
                                 </td>) || null}
                             </tr>
                         }
@@ -86,8 +88,7 @@ export default injectIntl(class GenelList extends Component {
                         <>
                             {this.props.add && <Col md="1">
                                 <a href={this.props.add} onClick={this.handleAdd.bind(this)}
-                                   className="btn btn-primary btn-add font-xl btn-block"><i
-                                    className="fas fa-plus"></i> <FormattedMessage id="general.new"/> </a>
+                                   className="btn btn-primary btn-add font-xl btn-block"><i className="fas fa-plus"></i> <FormattedMessage id="general.new"/> </a>
                             </Col>}
                             {this.props.children[2]}
                         </>
