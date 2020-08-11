@@ -39,11 +39,11 @@ export default class Orals extends Component {
                                 <td>{row.topic && row.topic.value}</td>
                                 <td>{row.parampre && row.parampre.value}</td>
                                 <td>{row.authors.map((author, index) => <div>
-                                    <div>{index + 1}. {author.name} {author.surname}{" "}
-                                        {!!author.correspond && <span>(Correspond)</span>}
-                                        {!!author.presenter && <span>(Presenter)</span>}
-                                    </div>
-                                </div>)}</td>
+                                    {index + 1}. {author.name} {author.surname}{" "}
+                                    {!!author.correspond && <>(Correspond)</>}
+                                    {!!author.presenter && <>(Presenter)</>}
+                                </div>)}
+                                </td>
                                 <th><Link to={"/presentation/" + row.id + "/watch"} className="btn btn-sm btn-outline-primary"><i className="fas fa-eye"/> Watch</Link></th>
                             </>
                         }
