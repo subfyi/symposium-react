@@ -27,6 +27,7 @@
 .brand-dark {
   @import "./_metronic/_assets/sass/themes/layout/brand/dark.scss";
 }
+
 // Light
 .brand-light {
   @import "./_metronic/_assets/sass/themes/layout/brand/light.scss";
@@ -45,14 +46,15 @@
 .example-highlight > pre {
   background: none transparent !important;
   margin: 0 !important;
-  padding-top: 0.5rem; 
-  code { 
-      overflow-y: auto;
-      display: block;
+  padding-top: 0.5rem;
 
-      span {
-        background: none transparent !important;
-      }
+  code {
+    overflow-y: auto;
+    display: block;
+
+    span {
+      background: none transparent !important;
+    }
   }
 }
 
@@ -78,12 +80,12 @@
 .react-bootstrap-table {
   th {
     outline: none;
-   
-    &.sortable {  
+
+    &.sortable {
       .svg-icon-sort {
         opacity: 0;
       }
-  
+
       &:hover {
         cursor: pointer;
 
@@ -91,23 +93,22 @@
           opacity: 1;
         }
       }
-    }    
+    }
   }
 
   .table.table-head-custom thead tr {
     .sortable-active {
-        color: $primary !important;
+      color: $primary !important;
     }
   }
 }
 
 
-
-// .nav-link:focus {  
+// .nav-link:focus {
 //     outline: none;  
 // }
 
-body{
+body {
   background-image: url(/media/bg/bg-11.jpg);
 }
 
@@ -133,6 +134,7 @@ body{
 .thstyle {
   width: 120px;
 }
+
 .ck-content {
   min-height: 200px;
 }
@@ -155,9 +157,11 @@ body{
 [style*="--aspect-ratio"] > :first-child {
   width: 100%;
 }
+
 [style*="--aspect-ratio"] > img {
   height: auto;
 }
+
 @supports (--custom:property) {
   [style*="--aspect-ratio"] {
     position: relative;
@@ -175,7 +179,6 @@ body{
     height: 100%;
   }
 }
-
 
 body.swal2-height-auto {
   height: inherit !important;
