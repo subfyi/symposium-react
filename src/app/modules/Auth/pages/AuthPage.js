@@ -93,7 +93,7 @@ export function AuthPage() {
                     component={ForgotPassword}
                 />
                   <ContentRoute
-                      path="/auth/reset-password"
+                      path="/auth/reset-password/:token/:email"
                       component={ResetPassword}
                   />
 

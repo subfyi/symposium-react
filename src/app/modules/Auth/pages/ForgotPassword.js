@@ -40,8 +40,6 @@ export default class extends React.Component {
         }
 
         if (!hata) {
-            await log_in(this.state.email, this.state.password);
-            loggedIn(true);
             await swal2.fire('Successful', 'Successfully Send New.', 'success');
         }
     }

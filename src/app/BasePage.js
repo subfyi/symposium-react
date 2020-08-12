@@ -2,8 +2,6 @@ import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { LayoutSplashScreen } from "../_metronic/layout";
 
-
-
 const ProfileEdit = React.lazy(() =>
     import('./pages/Profile/Edit')
 );

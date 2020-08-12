@@ -175,3 +175,8 @@ body{
     height: 100%;
   }
 }
+
+
+body.swal2-height-auto {
+  height: inherit !important;
+}

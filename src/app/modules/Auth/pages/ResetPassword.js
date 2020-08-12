@@ -8,7 +8,7 @@ import swal2 from 'sweetalert2';
 import Validator from '../../../common/Validator';
 
 export default class extends React.Component {
-    state = {};
+    state = {loading: true};
 
     constructor(props) {
         super(props);
@@ -16,8 +16,23 @@ export default class extends React.Component {
         this.validator = new SimpleReactValidator();
     }
 
+    async componentDidMount() {
+        const { token, email } = this.props.match.params;
+
+        var hata = await hatagoster(
+            free.get('/api/reset', { params: { token: decodeURIComponent(token), email: decodeURIComponent(email) } })
+        );
+
+        if (!hata) {
+            this.setState({loading: false});
+        } else {
+            this.setState({loading: 'hata'});
+        }
+    }
+
     async handleSubmit(e) {
         e.preventDefault();
+        const { token, email } = this.props.match.params;
 
         if (this.loading)
             return;
@@ -33,20 +48,25 @@ export default class extends React.Component {
         this.loading = true;
         try {
             hata = await hatagoster(
-                free.post('/api/reset', this.state)
+                free.post('/api/reset', { token:decodeURIComponent(token), email:decodeURIComponent(email), password: this.state.password })
             );
         } finally {
             this.loading = false;
         }
 
         if (!hata) {
-            await log_in(this.state.email, this.state.password);
+            await log_in(decodeURIComponent(email), this.state.password);
             loggedIn(true);
             await swal2.fire('Successful', 'Successfully Send New.', 'success');
         }
     }
 
     render() {
+        if (this.state.loading == 'hata')
+            return <Redirect to="/auth/login" />;
+        if (this.state.loading)
+            return null;
+
         return (
             <div className="login-form login-forgot" style={{display: "block"}}>
                 <div className="text-center mb-10 mb-lg-20">
@@ -56,6 +76,14 @@ export default class extends React.Component {
                     </div>
                 </div>
                 <div className="form-group fv-plugins-icon-container">
+                    <FormGroup>
+                            <Input
+                                type="text"
+                                readOnly
+                                className={`form-control form-control-solid h-auto py-5 px-6 `}
+                                value={decodeURIComponent(this.props.match.params.email)}
+                            />
+                    </FormGroup>
                     <FormGroup>
                         <Validator
                             name="password"

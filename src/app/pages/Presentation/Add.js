@@ -59,8 +59,8 @@ export default class AddPresentation extends Component {
                                 <p>
                                     {controller.state.authors.map((author, index) =>
                                         <>{author.name} {author.surname}{" "}
-                                            {!!author.correspond && <span>(Correspond)</span>}
-                                            {!!author.presenter && <span>(Presenter)</span>},
+                                            {!!author.correspond && <>(Correspond)</>}
+                                            {!!author.presenter && <span>{'('}Presenter{')'}</span>},
                                         </>
                                     )}
 
