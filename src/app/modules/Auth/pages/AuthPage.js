@@ -6,6 +6,7 @@ import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
 import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 import Registration from "./Registration";
 import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 import Login from "./Login";
 
 export function AuthPage() {
@@ -91,6 +92,10 @@ export function AuthPage() {
                     path="/auth/forgot-password"
                     component={ForgotPassword}
                 />
+                  <ContentRoute
+                      path="/auth/reset-password"
+                      component={ResetPassword}
+                  />
 
                 <Redirect from="/auth" exact={true} to="/auth/login"/>
                 <Redirect to="/auth/login"/>
