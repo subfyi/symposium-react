@@ -88,7 +88,7 @@ export default injectIntl(class GenelList extends Component {
                         <>
                             {this.props.add && <Col md="1">
                                 <a href={this.props.add} onClick={this.handleAdd.bind(this)}
-                                   className="btn btn-primary btn-add font-xl btn-block"><i className="fas fa-plus"></i> <FormattedMessage id="general.new"/> </a>
+                                   className="btn btn-outline-light btn-add font-xl btn-block"><i className="fas fa-plus"></i> <FormattedMessage id="general.new"/> </a>
                             </Col>}
                             {this.props.children[2]}
                         </>

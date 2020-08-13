@@ -183,7 +183,7 @@ export default class DataTable extends Component {
         return <div>
             <FormGroup row>
 
-                {this.props.add && <Col xs="12" md="2"><Link to={this.props.add} className="col-md-12 btn btn-primary font-xl d-block mb-12"><i className="fa fa-plus"/> <FormattedMessage
+                {this.props.add && <Col xs="12" md="2"><Link to={this.props.add} className="col-md-12 btn btn-outline-dark font-xl d-block mb-12"><i className="fa fa-plus"/> <FormattedMessage
                     id="general.add_new"/></Link></Col>}
 
                 <Col md="2">
@@ -196,15 +196,14 @@ export default class DataTable extends Component {
                         <option value="-1">All</option>
                     </Input>
                 </Col>
-                <Col xs="12" md="2"></Col>
-                <Col xs="12" md="2">
+                <Col xs="12" md="3"></Col>
+                <Col xs="12" md="1">
                     {this.props.add && <Button
-                        color="primary"
                         block
-                        className="font-xl"
+                        className="font-xl btn btn-outline-dark"
                         onClick={this.handleExcel.bind(this)}>
-                        <i className="fa fa-file-excel"/>
-                        <FormattedMessage id="general.excell"/></Button>}
+                        <i className="fa fa-file-excel"/></Button>
+                    }
                 </Col>
                 <Col xs="12" md="4">
                     <Input placeholder="Search..." type="text" value={this.state.params.query}

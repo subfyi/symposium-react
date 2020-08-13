@@ -132,7 +132,9 @@ body {
 }
 
 .thstyle {
-  width: 120px;
+  text-align: center;
+  vertical-align: center;
+  width: 100px;
 }
 
 .ck-content {
@@ -150,9 +152,6 @@ body {
 }
 
 
-.thstyle {
-  width: 180px;
-}
 
 [style*="--aspect-ratio"] > :first-child {
   width: 100%;

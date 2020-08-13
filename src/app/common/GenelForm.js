@@ -79,9 +79,6 @@ export default class GenelForm extends Component {
     return (
       <div className="animated fadeIn">
         <Card>
-          <CardHeader>
-             { this.props.name } { this.props.id ? "Save" : "Save" }
-          </CardHeader>
           <CardBody>
             { this.props.children(this) }
             <Row>

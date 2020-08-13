@@ -23,7 +23,7 @@ export default class List extends Component {
                     <GenelList islem={false} url="/api/submission?page=1&itemPerPage=-1&query=&sort=id&desc=false&posters=1&year=2020&presentation=1">
                         <>
                             <td>#</td>
-                            <th sort="pap_title">Title of Abstract</th>
+                            <th sort="en_title">Title of Abstract</th>
                             <th sort="topic.value">Topic of Article</th>
                             <th sort="parampre.value">Pre. Type</th>
                             <th>Authors</th>
@@ -32,7 +32,7 @@ export default class List extends Component {
                         {
                             (row) => <>
                                 <td>#</td>
-                                <td>{row.pap_title}</td>
+                                <td>{row.en_title}</td>
                                 <td>{row.topic && row.topic.value}</td>
                                 <td>{row.parampre && row.parampre.value}</td>
                                 <td>{row.authors.map((author, index) => <div>

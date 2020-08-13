@@ -54,7 +54,7 @@ export default class AddPresentation extends Component {
                         </CustomPanel>
 
                         <Card><CardHeader
-                            title={"Title: " + controller.state.pap_title}/>
+                            title={"Title: " + controller.state.en_title}/>
                             <CardBody>
                                 <p>
                                     {controller.state.authors.map((author, index) =>
@@ -67,7 +67,7 @@ export default class AddPresentation extends Component {
                                 </p>
                                 <hr/>
                                 <p>
-                                    <b>Abstract</b>: {controller.state.pap_abstract}
+                                    <b>Abstract</b>: {controller.state.en_abstract}
                                 </p>
                                 <hr/>
                                 <p>

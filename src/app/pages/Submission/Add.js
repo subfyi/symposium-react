@@ -39,14 +39,14 @@ export default class Add extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="pap_title"
+                                    name="en_title"
                                     type="required"
                                     controller={controller}>
                                     <Input type="text"
                                            disabled={!!controller.state.paper_approved && !(this.state.user && this.state.user.yetki >= 8)}
 
-                                           value={controller.state.pap_title}
-                                           onChange={a => controller.setState({pap_title: a.currentTarget.value})}/>
+                                           value={controller.state.en_title}
+                                           onChange={a => controller.setState({en_title: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
@@ -56,14 +56,14 @@ export default class Add extends Component {
                             </Col>
                             <Col xs="12" md="9">
                                 <Validator
-                                    name="pap_abstract"
+                                    name="en_abstract"
                                     type="required"
                                     controller={controller}>
                                     <Input type="textarea"
                                            rows="10"
                                            disabled={!!controller.state.paper_approved && !(this.state.user && this.state.user.yetki >= 8)}
-                                           value={controller.state.pap_abstract}
-                                           onChange={a => controller.setState({pap_abstract: a.currentTarget.value})}/>
+                                           value={controller.state.en_abstract}
+                                           onChange={a => controller.setState({en_abstract: a.currentTarget.value})}/>
                                 </Validator>
                             </Col>
                         </FormGroup>
