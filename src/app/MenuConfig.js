@@ -33,7 +33,50 @@ export default {
                 bullet: "dot",
                 type: "single",
             },
+            {
+                title: "Properties",
+                root: true,
+                alignment: "left",
+                toggle: "click",
+                yetki: 7,
+                submenu: {
+                    type: "mega",
+                    width: "800px",
+                    alignment: "left",
+                    columns: [
+                        {
+                            items: [
+                                {
+                                    title: "Presentation Types",
+                                    page: "typepresentation",
+                                    bullet: "line"
+                                },
+                                {
+                                    title: "Language Types",
+                                    page: "typelanguage",
+                                    bullet: "line"
+                                },
+                            ]
+                        },
+                        {
+                            items: [
+                                {
+                                    title: "Topic Types",
+                                    page: "typetopic",
+                                    bullet: "line"
+                                },
+                                {
+                                    title: "Publish Types",
+                                    page: "typepublish",
+                                    bullet: "line"
+                                },
+                            ]
+                        },
 
+
+                    ]
+                }
+            },
             {
                 title: "Others",
                 bullet: "line",
@@ -47,7 +90,7 @@ export default {
                         bullet: "line",
                     },
                     {
-                        title: "Old Symposiums",
+                        title: "All Symposiums",
                         page: "https://iseser.com/documents-all",
                         bullet: "line",
                     },

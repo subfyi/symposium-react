@@ -5,7 +5,7 @@
   "homepage": "https://iseser.com",
   "scripts": {
     "serve": "cp-cli build _site/react/preview/react/demo1 && serve",
-    "start": "PORT=3001 react-scripts start -o",
+    "start": "PORT=4000 react-scripts start -o",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

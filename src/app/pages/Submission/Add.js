@@ -9,6 +9,7 @@ import ParameterSelect from '../../common/ParameterSelect';
 import SingleFilePicker from '../../upload/SingleFilePicker';
 import {tokenized} from '../../api';
 import GDriveSingleFilePicker from '../../upload/GDriveSingleFilePicker';
+import ApiSelect from "../../common/ApiSelect";
 
 export default class Add extends Component {
     state = {};
@@ -33,6 +34,49 @@ export default class Add extends Component {
             >
                 {
                     controller => <>
+
+                        {controller.state.video && this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Video Approved</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <CustomInput
+                                    id="video_approved"
+                                    type="checkbox"
+                                    checked={!!controller.state.video_approved}
+                                    onChange={a => controller.setState({video_approved: a.currentTarget.checked ? 1 : 0})}
+                                />
+                                <a href={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} target="_blank"
+                                   className="mt-2 btn btn-sm btn-outline-primary">
+                                    Watch Video
+                                </a>
+                            </Col>
+                        </FormGroup>}
+
+                        {this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">Paper Approved</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <CustomInput
+                                    id="paper_approved"
+                                    type="checkbox"
+                                    checked={!!controller.state.paper_approved}
+                                    onChange={a => controller.setState({paper_approved: a.currentTarget.checked ? 1 : 0})}
+                                />
+                            </Col>
+                        </FormGroup>}
+
+                        {this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
+                            <Col md="3">
+                                <Label htmlFor="text-input">title_year</Label>
+                            </Col>
+                            <Col xs="12" md="9">
+                                <Input type="text" value={controller.state.title_year}
+                                       onChange={a => controller.setState({title_year: a.currentTarget.value})}/>
+                            </Col>
+                        </FormGroup>}
+
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Article Title (ENG) </Label>
@@ -108,16 +152,15 @@ export default class Add extends Component {
                                 <Label htmlFor="text-input">Presentation Type</Label>
                             </Col>
                             <Col xs="12" md="9">
-                                <Validator
-                                    name="pre_type"
-                                    type="required"
-                                    controller={controller}>
-                                    <ParameterSelect
-                                        type="uygulamacon"
-                                        value={controller.state.pre_type}
-                                        disabled={!!controller.state.paper_approved && !(this.state.user && this.state.user.yetki >= 8)}
-                                        onChange={a => controller.setState({pre_type: a})}/>
+                                <Validator type="required" name="lang" controller={controller}>
+                                    <ApiSelect
+                                        url="/api/typelanguage"
+                                        selected={controller.state.lang}
+                                        onChange={a => controller.setState({lang: a})}
+                                    />
                                 </Validator>
+
+
                             </Col>
                         </FormGroup>
                         <FormGroup row>
@@ -182,47 +225,7 @@ export default class Add extends Component {
                                 />
                             </Col>
                         </FormGroup>
-                        {controller.state.video && this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
-                            <Col md="3">
-                                <Label htmlFor="text-input">Video Approved</Label>
-                            </Col>
-                            <Col xs="12" md="9">
-                                <CustomInput
-                                    id="video_approved"
-                                    type="checkbox"
-                                    checked={!!controller.state.video_approved}
-                                    onChange={a => controller.setState({video_approved: a.currentTarget.checked ? 1 : 0})}
-                                />
-                                <a href={`https://drive.google.com/file/d/${controller.state.video.g_dosyaismi}/preview`} target="_blank"
-                                   className="mt-2 btn btn-sm btn-outline-primary">
-                                    Watch Video
-                                </a>
-                            </Col>
-                        </FormGroup>}
 
-                        {this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
-                            <Col md="3">
-                                <Label htmlFor="text-input">Paper Approved</Label>
-                            </Col>
-                            <Col xs="12" md="9">
-                                <CustomInput
-                                    id="paper_approved"
-                                    type="checkbox"
-                                    checked={!!controller.state.paper_approved}
-                                    onChange={a => controller.setState({paper_approved: a.currentTarget.checked ? 1 : 0})}
-                                />
-                            </Col>
-                        </FormGroup>}
-
-                        {this.state.user && this.state.user.yetki >= 8 && <FormGroup row>
-                            <Col md="3">
-                                <Label htmlFor="text-input">title_year</Label>
-                            </Col>
-                            <Col xs="12" md="9">
-                                <Input type="text" value={controller.state.title_year}
-                                       onChange={a => controller.setState({title_year: a.currentTarget.value})}/>
-                            </Col>
-                        </FormGroup>}
                         <FormGroup row>
                             <Col md="3">
                                 <Label htmlFor="text-input">Prefered Publish Type</Label>

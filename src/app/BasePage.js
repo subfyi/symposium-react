@@ -26,6 +26,38 @@ const AddPresentation = React.lazy(() =>
     import('./pages/Presentation/Add')
 );
 
+const TypePresentationList = React.lazy(() =>
+    import('./pages/TypePresentation/List')
+);
+
+const TypePresentationAdd = React.lazy(() =>
+    import('./pages/TypePresentation/Add')
+);
+
+const TypeTopicList = React.lazy(() =>
+    import('./pages/TypeTopic/List')
+);
+
+const TypeTopicAdd = React.lazy(() =>
+    import('./pages/TypeTopic/Add')
+);
+
+const TypePublishList = React.lazy(() =>
+    import('./pages/TypePublish/List')
+);
+
+const TypePublishAdd = React.lazy(() =>
+    import('./pages/TypePublish/Add')
+);
+
+const TypeLanguageList = React.lazy(() =>
+    import('./pages/TypeLanguage/List')
+);
+
+const TypeLanguageAdd = React.lazy(() =>
+    import('./pages/TypeLanguage/Add')
+);
+
 export default function BasePage() {
 
     return (
@@ -44,6 +76,22 @@ export default function BasePage() {
                 <Route path="/presentation/:id/watch" component={AddPresentation}/>
                 <Route path="/presentation-oral" component={PresentationOral}/>
                 <Route path="/presentation-poster" component={PresentationPoster}/>
+
+                <Route path="/typepresentation/:id/edit" component={TypePresentationAdd}/>
+                <Route path="/typepresentation/create"  component={TypePresentationAdd}/>
+                <Route path="/typepresentation"  component={TypePresentationList}/>
+
+                <Route path="/typetopic/:id/edit" component={TypeTopicAdd}/>
+                <Route path="/typetopic/create"  component={TypeTopicAdd}/>
+                <Route path="/typetopic"  component={TypeTopicList}/>
+
+                <Route path="/typepublish/:id/edit" component={TypePublishAdd}/>
+                <Route path="/typepublish/create"  component={TypePublishAdd}/>
+                <Route path="/typepublish"  component={TypePublishList}/>
+
+                <Route path="/typelanguage/:id/edit" component={TypeLanguageAdd}/>
+                <Route path="/typelanguage/create"  component={TypeLanguageAdd}/>
+                <Route path="/typelanguage"  component={TypeLanguageList}/>
 
                 <Redirect to="/error/error-v6"/>
             </Switch>

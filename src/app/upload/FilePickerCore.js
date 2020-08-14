@@ -93,10 +93,10 @@ export default class FilePickerCore extends Component {
       return <div className={this.props.className}>
         <a href="#" className="btn btn-outline-danger btn-sm" onClick={this.iptalEt.bind(this)}><i className="fa fa-times-circle" /></a>
         &nbsp;<a href="#" onClick={a => a.preventDefault()} className="btn btn-sm btn-outline-dark disabled">
-          <i className="fa fa-spinner fa-spin" />
-          <span style={{ width: '35px', display: 'inline-block' }}>{ Math.round(controller.$pr * 1000) / 10 }%</span>
-          { controller.name }
-        </a>
+        <i className="fa fa-spinner fa-spin" />
+        <span style={{ width: '35px', display: 'inline-block' }}>{ Math.round(controller.$pr * 1000) / 10 }%</span>
+        { controller.name }
+      </a>
       </div>;
     } else if(controller.$state === 3) { // yuklendi
       console.log(controller);
